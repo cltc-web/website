@@ -1,0 +1,20 @@
+/* Phone-only refinements of Community C. Desktop C is unchanged. */
+@media (max-width:620px) {
+  /* Two cards per row, matching the four club facts above. Let every card grow with its text. */
+  .c-mobile .service-list { grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
+  .c-mobile .service-list a { min-width:0; min-height:0; padding:16px 13px; border-radius:12px; overflow-wrap:break-word; }
+  .c-mobile .service-list span { display:block; font-size:clamp(15px,4.1vw,18px); line-height:1.2; }
+  .c-mobile .service-list strong { display:block; margin-top:10px; font-size:13px; line-height:1.5; }
+  .c-mobile .service-list a::after { margin-top:12px; font-size:19px; }
+
+  .c-mobile-1 .hero, .c-mobile-3 .hero { grid-template-columns:minmax(0,1fr); }
+  .c-mobile-1 .hero-media, .c-mobile-1 .hero-social,
+  .c-mobile-3 .hero-media, .c-mobile-3 .hero-social { display:none; }
+  .c-mobile-2 .hero { grid-template-columns:minmax(0,1fr); }
+  .c-mobile-2 .hero-media { grid-column:1; border-radius:14px; }
+  .c-mobile-2 .hero-media img { height:auto; aspect-ratio:1.9; }
+  .c-mobile-2 .hero-media figcaption { display:block; padding:8px 12px; }
+  .c-mobile-2 .hero-social { display:none; }
+  .c-mobile-3 .hero { padding-bottom:0; }
+  .c-mobile-3 .quick-facts { margin-top:0; }
+}
