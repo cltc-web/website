@@ -1,0 +1,208 @@
+@page {
+  size: A4;
+  margin: 8mm;
+}
+
+@media print {
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  body {
+    background: #ffffff;
+  }
+
+  .newsletter-page {
+    width: 100%;
+    max-width: 920px;
+    margin: 0 auto;
+    box-shadow: none;
+  }
+
+  .newsletter-hero {
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 22px;
+    padding: 26px 32px;
+  }
+
+  .newsletter-hero--with-sponsor .hero-copy {
+    padding-right: 170px;
+  }
+
+  .hero-sponsor-badge {
+    top: 18px;
+    right: 22px;
+  }
+
+  .newsletter-hero::after {
+    opacity: 0.8;
+  }
+
+  .hero-logo {
+    width: 96px;
+    height: 96px;
+  }
+
+  h1 {
+    font-size: 34px;
+  }
+
+  .subtitle {
+    font-size: 16px;
+  }
+
+  .quick-links {
+    display: none;
+  }
+
+  .newsletter-content {
+    padding: 26px 32px 32px;
+  }
+
+  .section {
+    margin: 28px 0;
+  }
+
+
+  .section h2 {
+    font-size: 24px;
+  }
+
+  .panel {
+    padding: 20px;
+  }
+
+  .glance-card,
+  .panel,
+  .reminder,
+  .qr-card {
+    box-shadow: none;
+  }
+
+  .panel,
+  .section {
+    break-inside: auto;
+    page-break-inside: auto;
+  }
+
+  .glance-card,
+  .reminder,
+  .qr-card,
+  .badge,
+  .link-card,
+  table,
+  figure {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .at-a-glance {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .split {
+    grid-template-columns: minmax(0, 1.25fr) minmax(190px, 0.75fr);
+    gap: 18px;
+    align-items: start;
+  }
+
+  .split-media-left {
+    grid-template-columns: minmax(190px, 0.75fr) minmax(0, 1.25fr);
+  }
+
+  .badge-list,
+  .link-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .results-grid,
+  .reminders {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .qr-row {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .glance-card {
+    min-height: 0;
+    padding: 14px;
+  }
+
+  .glance-card strong {
+    font-size: 16px;
+  }
+
+  .glance-card span,
+  .badge,
+  .link-card,
+  table {
+    font-size: 13px;
+  }
+
+  .qr-card img {
+    width: 96px;
+    height: 96px;
+  }
+
+  .image-slot img {
+    max-height: 260px;
+  }
+
+  footer {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .sponsor-strip {
+    grid-template-columns: minmax(0, 1fr) minmax(220px, 1.1fr) minmax(0, 1fr);
+    gap: 16px;
+    align-items: center;
+    padding: 14px 32px;
+    text-align: left;
+  }
+
+  .footer-contact a {
+    justify-self: start;
+  }
+
+  .boc-logo img {
+    width: 190px;
+  }
+
+  .venue-logo {
+    justify-self: end;
+    width: 110px;
+  }
+
+  .newsletter-footer {
+    padding: 14px 32px;
+  }
+
+  .footer-club {
+    grid-template-columns: 64px minmax(0, 1fr) 64px;
+    gap: 20px;
+  }
+
+  .footer-logo {
+    width: 56px;
+    height: 56px;
+  }
+
+  .footer-club-name {
+    font-size: 20px;
+  }
+
+  /* Do not print long URLs after linked QR codes/buttons; they make the PDF untidy. */
+  a[href^="http"]::after,
+  a[href^="mailto"]::after,
+  a[href^="tel"]::after {
+    content: none;
+  }
+}

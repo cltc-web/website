@@ -38,6 +38,11 @@
 .iteration-c .quick-facts div:nth-child(2) { background:#f9dfd3; }
 .iteration-c .quick-facts div:nth-child(3) { background:#f8edbf; }
 .iteration-c .quick-facts div:nth-child(4) { background:#e2ebef; }
+.iteration-c .location-fact { position:relative; }
+.iteration-c .location-fact a { color:inherit; text-decoration:none; }
+.iteration-c .location-fact a::after { content:""; position:absolute; inset:0; border-radius:inherit; }
+.iteration-c .location-fact:focus-within { outline:3px solid #214b3c; outline-offset:3px; }
+.iteration-c .location-fact:hover strong { text-decoration:underline; }
 .iteration-c .service-list a { background:#dcefe4; }
 .iteration-c .service-list a:nth-child(3n+2) { background:#f9dfd3; }
 .iteration-c .service-list a:nth-child(3n+3) { background:#f8edbf; }

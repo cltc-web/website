@@ -1,17 +1,485 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="robots" content="noindex, nofollow">
-  <title>May 2026 newsletter | Committee preview</title>
+  <title>CLTC Newsletter - May 2026</title>
+  <link rel="stylesheet" href="templates/newsletter.css">
+  <link rel="stylesheet" href="templates/newsletter-print.css">
 </head>
-<body style="font:18px/1.6 system-ui;max-width:42rem;margin:10vh auto;padding:1rem">
-  <main>
-    <p>CLTC · Committee preview — not the live website</p>
-    <h1>May 2026 newsletter</h1>
-    <p>Newsletter content is not included in this committee preview. This placeholder demonstrates the website navigation without publishing member newsletters.</p>
-    <a href="../../index.html#newsletters">Back to the website preview</a>
+
+<body>
+  <main class="newsletter-page">
+    <header class="newsletter-hero newsletter-hero--with-sponsor">
+      <img class="hero-logo" src="assets/logo.png" alt="Carshalton Lawn Tennis Club logo">
+      <div class="hero-sponsor-badge" aria-label="Newsletter sponsor">
+        <div class="hero-sponsor-label">Sponsored by</div>
+        <a href="https://www.bocconstruction.co.uk/" aria-label="BOC Construction Services">
+          <img src="assets/boc-construction-services.png" alt="BOC Construction Services">
+        </a>
+      </div>
+      <div class="hero-copy">
+        <div class="club-kicker">Carshalton Lawn Tennis Club</div>
+        <h1>Newsletter - May 2026</h1>
+        <p class="subtitle">Club news, tournament updates, team tennis, box league results and a few friendly reminders.
+        </p>
+        <nav class="quick-links" aria-label="Newsletter sections">
+          <a class="pill" href="#dates">Dates</a>
+          <a class="pill" href="#tribute">Tribute</a>
+          <a class="pill" href="#tournament">Tournament</a>
+          <a class="pill" href="#juniors">Juniors</a>
+          <a class="pill" href="#teams">Team tennis</a>
+          <a class="pill" href="#box-league">Box league</a>
+          <a class="pill" href="#reminders">Reminders</a>
+        </nav>
+      </div>
+    </header>
+
+    <section class="newsletter-content">
+      <!-- EDIT: Opening paragraph. Keep this short. -->
+      <p class="intro">With the new membership year underway and the evenings getting lighter, it is lovely to see the
+        club getting busier again. Thank you to everyone who has renewed, helped at events, captained teams, supported
+        the bar, joined social tennis, or simply helped keep the clubhouse and courts welcoming for the next members
+        arriving.</p>
+
+      <section class="at-a-glance" id="dates" aria-label="This month at a glance">
+        <article class="glance-card">
+          <div class="glance-label">Key date</div>
+          <strong>Finals Day</strong>
+          <span>Saturday 27 June - tennis, food, drinks and family fun.</span>
+        </article>
+        <article class="glance-card">
+          <div class="glance-label">On court</div>
+          <strong>Tournament underway</strong>
+          <span>Please arrange matches early and keep an eye on deadlines.</span>
+        </article>
+        <article class="glance-card">
+          <div class="glance-label">Congrats</div>
+          <strong>Three division wins</strong>
+          <span>Ladies 1, Ladies 2 and Men's 1 all topped their divisions.</span>
+        </article>
+        <article class="glance-card">
+          <div class="glance-label">Reminder</div>
+          <strong>Book before play</strong>
+          <span>Please use ClubSpark or the LTA Booker app before heading on court.</span>
+        </article>
+      </section>
+
+      <section class="section" id="tribute">
+        <h2>Tribute to Frank Fennell</h2>
+        <div class="split split-media-left">
+          <aside>
+            <figure class="image-slot image-slot--portrait">
+              <img src="frank.jpg" alt="Frank Fennell smiling in a portrait photo">
+            </figure>
+          </aside>
+          <div class="panel">
+            <p>Many members will have been saddened to hear of the passing of <strong>Frank Fennell</strong>, who gave
+              an
+              extraordinary amount of time, care and energy to CLTC over many years.</p>
+            <p>Frank served the club in many roles, including Club Captain, Vice President and committee member. He was
+              always ready to volunteer, whether that meant welcoming new members, helping with matches and activities,
+              organising club events, or quietly getting on with the maintenance jobs that kept the club running
+              smoothly.</p>
+            <p>His practical skills, generosity and commitment made a lasting difference to the club. Frank played a key
+              part in major projects including the replacement clubhouse and floodlight installations, and many members
+              will also remember his work on Finals Day, club BBQs, social events and the centenary celebrations. He
+              took real pride in the success and sustainability of CLTC, and in seeing both adult and junior tennis
+              thrive.</p>
+            <p>Above all, Frank will be remembered for his kindness, thoughtfulness and the warm welcome he gave to so
+              many people at the club. Our thanks and condolences go to Jean and all of Frank's family. He will be
+              greatly missed and warmly remembered.</p>
+          </div>
+        </div>
+      </section>
+
+
+
+      <section class="section" id="membership">
+        <h2>Membership update</h2>
+        <div class="panel">
+          <p>The committee has spent a great deal of time reviewing the membership structure for 2026/27, with the aim
+            of keeping the club financially sustainable while also being as fair and thoughtful as possible for members
+            and families in the face of rising costs. Thank you to everyone who has already renewed and for your
+            continued support of the club.</p>
+          <p>If you have any membership queries or need to follow up on your renewal, please contact the Membership
+            Secretary at <a href="mailto:cltcmembership@gmail.com">cltcmembership@gmail.com</a>.</p>
+          <div class="badge-list">
+            <div class="badge">Membership fees have increased by 5% for 2026/27 to help meet the growing costs of
+              running the club.</div>
+            <div class="badge">Youth membership is now for ages 19-23, based on age on 1 April, creating a clearer step
+              between junior and adult membership.</div>
+            <div class="badge">A new student membership allows members away during term time to play during college or
+              university holidays for £50.</div>
+            <div class="badge">Junior members who are part of a family receive a 40% discount on their membership fee.
+            </div>
+            <div class="badge">The club has retained the family cap for up to two adults and four children under 18.
+            </div>
+            <div class="badge">Youth membership is not included in family discounted rates.</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="tournament">
+        <h2>Club Tournament 2026</h2>
+        <div class="split">
+          <div class="panel">
+            <p>The club tournament is now underway, with lots of matches being played. Finals Day is <strong>Saturday 27
+                June</strong>, which promises to be a fun day for the whole family.</p>
+            <p>There will be finals across multiple divisions, including juniors, women's, men's and mixed doubles,
+              along with food, drinks from the bar and plenty of support from the sidelines.</p>
+            <p>For any tournament queries or information, please contact tournament referees Nic: <a
+                href="https://wa.me/447981578784">07981578784</a> or Al: <a
+                href="https://wa.me/447787423032">07787423032</a> on WhatsApp.</p>
+            <div class="link-grid">
+              <a class="link-card" href="Mens Singles 2026 24.pdf">Men's Singles</a>
+              <a class="link-card" href="Mens Doubles 2026 17 .pdf">Men's Doubles</a>
+              <a class="link-card" href="Mens Vets 2026 16 .pdf">Men's Vet</a>
+              <a class="link-card" href="Ladies Singles 2026 8.pdf">Women's Singles</a>
+              <a class="link-card" href="Ladies Doubles 2026 8.pdf">Women's Doubles</a>
+              <a class="link-card" href="Ladies Vets Singles 2026 6.pdf">Women's Veterans</a>
+              <a class="link-card" href="Mixed 2026 15 .pdf">Mixed Doubles</a>
+              <a class="link-card" href="Tournament Rules - 2026.pdf">Tournament Rules</a>
+            </div>
+          </div>
+          <aside>
+            <figure class="image-slot">
+              <img src="finals.jpeg" alt="Players on court at CLTC on a sunny day during tournament season">
+              <figcaption>Tournament tennis in the sunshine at CLTC.</figcaption>
+            </figure>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section" id="teams">
+        <h2>Club team news</h2>
+        <div class="panel">
+          <p>The winter tennis season has concluded with outstanding success, as three of our teams secured the top spot
+            in their respective divisions. Congratulations to all the teams for their efforts and best wishes for the
+            next season.</p>
+          <div class="results-grid">
+            <table>
+              <thead>
+                <tr>
+                  <th colspan="2">Division winners</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Ladies 1st Team</td>
+                  <td>1st in Division 11</td>
+                </tr>
+                <tr>
+                  <td>Ladies 2nd Team</td>
+                  <td>1st in Division 17</td>
+                </tr>
+                <tr>
+                  <td>Men's 1st Team</td>
+                  <td>1st in Division 12</td>
+                </tr>
+              </tbody>
+            </table>
+            <table>
+              <thead>
+                <tr>
+                  <th colspan="2">Other results</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Men's 3rd Team</td>
+                  <td>2nd in Division 26</td>
+                </tr>
+                <tr>
+                  <td>Ladies 3rd Team</td>
+                  <td>4th in Division 21</td>
+                </tr>
+                <tr>
+                  <td>Men's 2nd Team</td>
+                  <td>5th in Division 18</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="box-league">
+        <h2>Box league</h2>
+        <div class="panel">
+          <p>A big thank you to everyone who took part in the winter box league. It is a great way to meet other
+            members, arrange friendly but competitive singles at a time that suits you, and keep playing through the
+            quieter months. Congratulations to all our box winners and runners-up.</p>
+          <div class="results-grid">
+            <table>
+              <thead>
+                <tr>
+                  <th>Open box</th>
+                  <th>Winner</th>
+                  <th>Runner-up</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>Marcin Feliks</td>
+                  <td>Luca Lorizzo</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>Neil McAlpine</td>
+                  <td>Oscar Williamson</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>Alasdair McCall</td>
+                  <td>Nicole Borzatti</td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>Richard Beales</td>
+                  <td>Mark Wareham</td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td>Peter O'Rourke</td>
+                  <td>Stefano Capece</td>
+                </tr>
+              </tbody>
+            </table>
+            <table>
+              <thead>
+                <tr>
+                  <th>Women's box</th>
+                  <th>Winner</th>
+                  <th>Runner-up</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>Wendy Bignold</td>
+                  <td>Carol Hunt</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>Ruth Short</td>
+                  <td>Edyta McCall</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>The spring box league is now coming to a close, so please complete any remaining matches as soon as
+            possible. If you would like to view the current boxes, join a future round, or simply find out more, use the
+            QR codes below. The WhatsApp group is also a helpful way to arrange matches and keep in touch with other
+            players.</p>
+          <div class="qr-row">
+            <div class="qr-card">
+              <a href="https://chat.whatsapp.com/H5VWF7nsKB27iRbjr4VEtv">
+                <img src="assets/qr/box-league-whatsapp-group.png" alt="QR code for Box league WhatsApp group">
+              </a>
+              <strong>Box league WhatsApp</strong><br><small>Scan or click to arrange matches</small>
+            </div>
+            <div class="qr-card">
+              <a href="https://competitions.lta.org.uk/box-ladder/cd5ce09a-bde8-474b-8db2-2592e508fc22/event/1">
+                <img src="assets/qr/open-box-league.png" alt="QR code for Open box league">
+              </a>
+              <strong>Open box league</strong><br><small>Scan or click to view and join</small>
+            </div>
+            <div class="qr-card">
+              <a href="https://competitions.lta.org.uk/box-ladder/cd5ce09a-bde8-474b-8db2-2592e508fc22/event/4">
+                <img src="assets/qr/ladies-box-league.png" alt="QR code for Ladies box league">
+              </a>
+              <strong>Women's box league</strong><br><small>Scan or click to view and join</small>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="juniors">
+        <h2>Junior tennis update</h2>
+        <div class="panel">
+          <h3>Junior box league</h3>
+          <p>A special mention to <strong>Emily, Ella, Isabelle, Orpheas, Alex and Aodhan</strong> for all their efforts
+            in playing their junior box league matches. The league is now on pause while the junior tournament takes
+            priority.</p>
+          <h3>Junior tournament</h3>
+          <p>The junior tournament draws are now on the junior noticeboard, with events for boys and girls in singles
+            and doubles. Please get your matches played and speak to Chris or Alexia if you have any queries.</p>
+          <p>The annual tournament for mini tennis and younger tennis players will be on <strong>Saturday 5
+              September</strong>. More details will be shared nearer the time.</p>
+        </div>
+      </section>
+
+      <section class="section" id="reminders">
+        <h2>Friendly club reminders</h2>
+        <div class="reminders">
+          <article class="reminder">
+            <h3>🧹 Clay courts</h3>
+            <p>Please sweep the artificial clay courts after play and clean your shoes before heading into the
+              clubhouse.</p>
+          </article>
+          <article class="reminder">
+            <h3>🏠 Clubhouse</h3>
+            <p>Please clear up after yourself, wash or put away glasses and mugs, and leave the bar and seating areas as
+              you would like to find them.</p>
+          </article>
+          <article class="reminder">
+            <h3>🚪 Last to leave</h3>
+            <p>Please turn off lights, close windows, and make sure all doors are properly shut and latched before
+              leaving.</p>
+          </article>
+          <article class="reminder">
+            <h3>🔐 Court gates</h3>
+            <p>Please close the gates to the hard courts, clay courts and hitting wall when you finish playing. It helps
+              keep the courts secure, protects the playing areas, and reduces the chance of wildlife finding its way in.
+            </p>
+          </article>
+          <article class="reminder">
+            <h3>🎾 Tuesday social tennis</h3>
+            <p>When Tuesday evening social is busy and a member is waiting, please shorten the set to first to 5 games.
+            </p>
+          </article>
+          <article class="reminder">
+            <h3>🟡 Tennis balls</h3>
+            <p>The committee has reviewed our ball supplier and noted the feedback about the new balls feeling fuzzier
+              than expected. We have spent time looking into the options and still believe these are the best choice for
+              the club overall. The fuzziness does wear off with play and the balls remain suitable for use, but we will
+              continue to monitor this.</p>
+          </article>
+          <article class="reminder">
+            <h3>🍺 Bar prices</h3>
+            <p>Beer prices at the bar are increasing by 50p. Thank you for continuing to support the club bar, which
+              helps fund the running of the clubhouse and club activities.</p>
+          </article>
+          <article class="reminder">
+            <h3>📅 Mid-week members</h3>
+            <p>Mid-week members are very welcome to take part in box leagues and the annual tournament. Please try to
+              arrange these matches during the week where possible. If a weekend match is occasionally needed, the
+              mid-week member should be signed in as a visitor and the usual visitor fee paid. Finals Day is an
+              exception, and no visitor fee will apply for mid-week members playing in a final.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Court booking</h2>
+        <div class="panel">
+          <p>Courts are naturally busier in spring and summer, especially with tournament matches, team practice and
+            social tennis all in full swing. Please book through ClubSpark or the ClubSpark Booker app before playing,
+            even if the courts look quiet when you arrive.</p>
+          <p>Booking helps everyone see court availability clearly and makes it easier for members to plan their tennis.
+            If you are flexible, daytime slots and Sunday afternoons are often quieter.</p>
+          <div class="qr-row">
+            <div class="qr-card">
+              <a href="https://apps.apple.com/gb/app/clubspark-booker/id1028325841ClubsparkBooker">
+                <img src="assets/qr/clubspark-booker-ios.png" alt="QR code for ClubSpark Booker iOS app">
+              </a>
+              <strong>iOS ClubSpark Booker</strong><br><small>Scan or click to download</small>
+            </div>
+            <div class="qr-card">
+              <a
+                href="https://play.google.com/store/apps/details?id=com.sportlabs.clubsparkplayers&amp;hl=en_GB&amp;pli=1">
+                <img src="assets/qr/clubspark-booker-android.png" alt="QR code for ClubSpark Booker Android app">
+              </a>
+              <strong>Android ClubSpark Booker</strong><br><small>Scan or click to download</small>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Social tennis and activities</h2>
+        <div class="panel">
+          <p>There is plenty happening at the club each week, whether you are looking for social doubles, fitness, team
+            practice, drills or a gentler way to get on court. Many sessions are turn-up-and-play, while others are
+            organised by captains or named contacts.</p>
+          <table>
+            <thead>
+              <tr>
+                <th>Activity</th>
+                <th>When</th>
+                <th>Details</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Cardio Tennis</td>
+                <td>Monday 7:15pm</td>
+                <td>Chris's WhatsApp:<a href="https://wa.me/447720941494">07720 941494</a></td>
+              </tr>
+              <tr>
+                <td>Social Tennis</td>
+                <td>Tuesday 6:30pm</td>
+                <td>Turn up and play; bar open</td>
+              </tr>
+              <tr>
+                <td>Team Practice</td>
+                <td>Thursday 6:30pm</td>
+                <td>Organised by team captains</td>
+              </tr>
+              <tr>
+                <td>Walking Tennis</td>
+                <td>Friday 11:30am</td>
+                <td>Alexia's WhatsApp:: <a href="https://wa.me/447939254398">07939 254398</a></td>
+              </tr>
+              <tr>
+                <td>Social Tennis</td>
+                <td>Friday 1:00pm</td>
+                <td>Turn up and play</td>
+              </tr>
+              <tr>
+                <td>Doubles drills and tactics</td>
+                <td>Saturday 12:15pm</td>
+                <td>Alexia's WhatsApp: <a href="https://wa.me/447939254398">07939 254398</a></td>
+              </tr>
+              <tr>
+                <td>Social Tennis</td>
+                <td>Saturday 1:00pm</td>
+                <td>Turn up and play</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Thank you</h2>
+        <div class="panel">
+          <p>CLTC works because members pitch in: captains, committee volunteers, coaches, social organisers, bar
+            helpers, parents, juniors and everyone who sweeps a court or checks a door before heading home.</p>
+          <p><strong>Thank you for helping keep the club friendly, tidy and welcoming.</strong></p>
+        </div>
+      </section>
+    </section>
+
+    <footer aria-label="Newsletter footer">
+      <section class="sponsor-strip" aria-label="Club contact and sponsors">
+        <div class="footer-contact">
+          <a href="mailto:info@carshaltontennis.org">info@carshaltontennis.org</a>
+          <a href="tel:+442087730927">0208 773 0927</a>
+        </div>
+        <div class="sponsor-card">
+          <div class="sponsor-label">Sponsored by</div>
+          <a class="boc-logo" href="https://www.bocconstruction.co.uk/" aria-label="BOC Construction Services">
+            <img src="assets/boc-construction-services.png" alt="BOC Construction Services">
+          </a>
+        </div>
+        <img class="venue-logo" src="assets/lta-registered-venue-2024-25.png" alt="LTA registered venue 2024/25">
+      </section>
+      <section class="newsletter-footer">
+        <div class="footer-club">
+          <img class="footer-logo" src="assets/logo.png" alt="Carshalton Lawn Tennis Club logo">
+          <div>
+            <strong class="footer-club-name">Carshalton Lawn Tennis Club</strong>
+            <p class="footer-meta">60-62 Beeches Avenue, Carshalton, SM5 3LW</p>
+          </div>
+          <img class="footer-logo" src="assets/logo.png" alt="">
+        </div>
+      </section>
+    </footer>
   </main>
 </body>
+
 </html>
