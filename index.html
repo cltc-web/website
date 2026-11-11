@@ -86,7 +86,7 @@
           <a class="button secondary" href="#coaching">Explore coaching <span aria-hidden="true">↓</span></a>
 
         </div>
-      <p class="hero-note">New to tennis or returning to the game? You’re welcome here.</p>
+      <p class="hero-note">New to tennis or returning to the game? You’re welcome here. <a href="https://wa.me/447356091428">WhatsApp the club</a>.</p>
       </div>
       <figure class="hero-media">
         <img
@@ -174,7 +174,7 @@
           <span>Team tennis and box leagues</span>
           <strong>Three men's teams, three women's teams, mixed team tennis, box leagues and Thursday team practice.</strong>
         </a>
-        <a href="#about">
+        <a href="#table-tennis-contact">
           <span>Table tennis</span>
           <strong>Table tennis in the clubhouse, including social play and teams.</strong>
         </a>
@@ -229,14 +229,14 @@
           <p>Chris has coached for over 30 years at clubs and schools across Surrey and has been our Head Coach for 20
             years. He leads the coaching programme, offers individual lessons, runs cardio tennis and supports local
             school tennis.</p>
-          <a href="https://wa.me/447720941494">WhatsApp Chris: 07720 941494</a>
+          <a href="https://wa.me/447720941494" aria-label="Message Chris Dent on WhatsApp: 07720 941494">07720 941494</a>
         </article>
         <article class="coach-card">
           <h3>Alexia King, Coach</h3>
           <p class="coach-meta">LTA Accredited+ Level 3</p>
           <p>Alexia has been part of the coaching team at Carshalton since 2016. She runs many of our group lessons,
             supports Chris with school coaching and provides individual lessons.</p>
-          <a href="https://wa.me/447939254398">WhatsApp Alexia: 07939 254398</a>
+          <a href="https://wa.me/447939254398" aria-label="Message Alexia King on WhatsApp: 07939 254398">07939 254398</a>
         </article>
       </div>
       <div class="junior-panel">
@@ -317,25 +317,25 @@
         <h2>A look around the club.</h2>
         <p>A few views from the courts and clubhouse at Carshalton Lawn Tennis Club.</p>
       </div>
-      <div class="gallery-grid">
+      <div class="gallery-grid" id="gallery-photos" data-gallery-preview>
         <figure><a href="assets/gallery/hero-courts-wendy-bignold.jpg" data-gallery-item data-caption="Blue courts looking towards the clubhouse." target="_blank" rel="noopener">
             <img loading="lazy" src="assets/gallery/hero-courts-wendy-bignold.jpg" alt="Blue tennis courts with the clubhouse in the distance">
             <figcaption>Blue courts looking towards the clubhouse.</figcaption></a></figure>
         <figure><a href="assets/gallery/IMG_2266.jpeg" data-gallery-item data-caption="Social tennis on the hard courts." target="_blank" rel="noopener">
             <img loading="lazy" src="assets/gallery/IMG_2266.jpeg" alt="Players enjoying tennis on the blue hard courts">
             <figcaption>Social tennis on the hard courts.</figcaption></a></figure>
-        <figure><a href="assets/gallery/wendy-20250905_103509.jpg" data-gallery-item data-caption="A sunny view across the courts." target="_blank" rel="noopener">
-            <img loading="lazy" src="assets/gallery/wendy-20250905_103509.jpg" alt="Blue courts seen from above on a sunny day">
-            <figcaption>A sunny view across the courts.</figcaption></a></figure>
-        <figure><a href="assets/gallery/wendy-20260322_115036.jpg" data-gallery-item data-caption="Our artificial clay courts." target="_blank" rel="noopener">
-            <img loading="lazy" src="assets/gallery/wendy-20260322_115036.jpg" alt="Artificial clay tennis courts in sunshine">
-            <figcaption>Our artificial clay courts.</figcaption></a></figure>
         <figure><a href="assets/gallery/IMG_6538.jpeg" data-gallery-item data-caption="Quiz night in the clubhouse." target="_blank" rel="noopener">
             <img loading="lazy" src="assets/gallery/IMG_6538.jpeg" alt="Members seated at tables during a busy clubhouse quiz night">
             <figcaption>Quiz night in the clubhouse.</figcaption></a></figure>
-        <figure><a href="assets/gallery/clubhouse-table-tennis.jpg" data-gallery-item data-caption="Table tennis in the clubhouse." target="_blank" rel="noopener">
-            <img loading="lazy" src="assets/gallery/clubhouse-table-tennis.jpg" alt="Two people playing table tennis inside the clubhouse">
+        <figure><a href="assets/gallery/wendy-20260322_115036.jpg" data-gallery-item data-caption="Our artificial clay courts." target="_blank" rel="noopener">
+            <img loading="lazy" src="assets/gallery/wendy-20260322_115036.jpg" alt="Artificial clay tennis courts in sunshine">
+            <figcaption>Our artificial clay courts.</figcaption></a></figure>
+        <figure><a href="assets/gallery/table-tennis-match.jpg" data-gallery-item data-caption="Table tennis in the clubhouse." target="_blank" rel="noopener">
+            <img loading="lazy" src="assets/gallery/table-tennis-match.jpg" alt="Two people playing table tennis inside the clubhouse">
             <figcaption>Table tennis in the clubhouse.</figcaption></a></figure>
+        <figure><a href="assets/gallery/wendy-20250905_103509.jpg" data-gallery-item data-caption="A sunny view across the courts." target="_blank" rel="noopener">
+            <img loading="lazy" src="assets/gallery/wendy-20250905_103509.jpg" alt="Blue courts seen from above on a sunny day">
+            <figcaption>A sunny view across the courts.</figcaption></a></figure>
         <figure><a href="assets/gallery/wendy-20260327_191027.jpg" data-gallery-item data-caption="An evening game under the floodlights." target="_blank" rel="noopener">
             <img loading="lazy" src="assets/gallery/wendy-20260327_191027.jpg" alt="Floodlit tennis courts at night">
             <figcaption>An evening game under the floodlights.</figcaption></a></figure>
@@ -355,12 +355,15 @@
             <img loading="lazy" src="assets/gallery/wendy-20260924_190312.jpg" alt="Pink and orange sunset above the tennis courts">
             <figcaption>An evening sky over the courts.</figcaption></a></figure>
       </div>
-      <dialog class="gallery-lightbox" aria-label="Image gallery">
+      <div class="gallery-controls">
+        <a class="button secondary" href="gallery.html">View gallery</a>
+      </div>
+      <dialog class="gallery-lightbox" id="gallery-dialog" aria-label="Image gallery">
         <button class="gallery-lightbox-close" type="button" aria-label="Close gallery">×</button>
         <button class="gallery-lightbox-nav gallery-lightbox-prev" type="button" aria-label="Previous image">‹</button>
         <figure>
           <img src="" alt="">
-          <figcaption></figcaption>
+          <figcaption aria-live="polite"><span class="gallery-caption"></span><span class="gallery-count"></span></figcaption>
         </figure>
         <button class="gallery-lightbox-nav gallery-lightbox-next" type="button" aria-label="Next image">›</button>
       </dialog>
@@ -455,34 +458,47 @@
         <p>For membership questions, coaching enquiries, safeguarding information or general club questions, use the
           contacts below.</p>
       </div>
-      <div class="location-panel contact-list">
-        <dl>
-          <div>
-            <dt>Membership Secretary</dt>
-            <dd><a href="mailto:cltcmembership@gmail.com">cltcmembership@gmail.com</a></dd>
-          </div>
-          <div>
-            <dt>Head Coach</dt>
-            <dd>Chris Dent — <a href="https://wa.me/447720941494">07720 941494</a></dd>
-          </div>
-          <div>
-            <dt>Coach</dt>
-            <dd>Alexia King — <a href="https://wa.me/447939254398">07939 254398</a></dd>
-          </div>
-          <div>
-            <dt>General enquiries</dt>
-            <dd><a href="mailto:info@carshaltontennis.org">info@carshaltontennis.org</a> or <a
-                href="tel:+442087730927">0208 773 0927</a></dd>
-          </div>
-          <div>
-            <dt>Box leagues</dt>
-            <dd><a href="https://chat.whatsapp.com/H5VWF7nsKB27iRbjr4VEtv">Join WhatsApp community</a></dd>
-          </div>
-          <div>
-            <dt>Policies and safeguarding</dt>
-            <dd><a href="https://www.carshaltontennis.org/policies">View club policies</a></dd>
-          </div>
-        </dl>
+      <div class="contact-groups">
+        <section class="location-panel contact-list" aria-labelledby="playing-contacts-title">
+          <h3 id="playing-contacts-title">Coaching and playing</h3>
+          <dl>
+            <div>
+              <dt>Head Coach</dt>
+              <dd>Chris Dent — <a href="https://wa.me/447720941494">07720 941494</a></dd>
+            </div>
+            <div>
+              <dt>Coach</dt>
+              <dd>Alexia King — <a href="https://wa.me/447939254398">07939 254398</a></dd>
+            </div>
+            <div id="table-tennis-contact">
+              <dt>Table tennis</dt>
+              <dd>Lewis Vidler — <a href="https://wa.me/447985304405" aria-label="Message Lewis Vidler on WhatsApp: 07985 304405">07985 304405</a></dd>
+            </div>
+            <div>
+              <dt>Box leagues</dt>
+              <dd>Alistair McCall — <a href="https://chat.whatsapp.com/H5VWF7nsKB27iRbjr4VEtv">Join box league community</a></dd>
+            </div>
+          </dl>
+        </section>
+        <section class="location-panel contact-list" aria-labelledby="club-contacts-title">
+          <h3 id="club-contacts-title">Club enquiries</h3>
+          <dl>
+            <div>
+              <dt>Membership Secretary</dt>
+              <dd><a href="mailto:cltcmembership@gmail.com">cltcmembership@gmail.com</a></dd>
+            </div>
+            <div>
+              <dt>General enquiries</dt>
+              <dd><a href="mailto:info@carshaltontennis.org">info@carshaltontennis.org</a><br>
+                <a href="https://wa.me/447356091428" aria-label="Message the club on WhatsApp: 07356 091428">07356 091428</a><br>
+                <a href="tel:+442087730927" aria-label="Call the club: 0208 773 0927">0208 773 0927</a></dd>
+            </div>
+            <div>
+              <dt>Policies and safeguarding</dt>
+              <dd><a href="policies/index.html">View club policies</a></dd>
+            </div>
+          </dl>
+        </section>
       </div>
     </section>
 
@@ -510,12 +526,9 @@
           the clubhouse and courts.</p>
       </div>
       <address>
-        <span>60-62 Beeches Avenue, Carshalton, SM5 3LW</span>
-        <a
-          href="https://www.google.com/maps/search/?api=1&query=Carshalton+Lawn+Tennis+Club+60-62+Beeches+Avenue+Carshalton+SM5+3LW">Open
-          in Google Maps</a>
-        <a href="mailto:cltcmembership@gmail.com">cltcmembership@gmail.com</a>
-        <a href="tel:+442087730927">0208 773 0927</a>
+        <a href="https://www.google.com/maps/search/?api=1&amp;query=Carshalton+Lawn+Tennis+Club+60-62+Beeches+Avenue+Carshalton+SM5+3LW" aria-label="60-62 Beeches Avenue, Carshalton, SM5 3LW — open in Google Maps">60-62 Beeches Avenue, Carshalton, SM5 3LW</a>
+        <a href="mailto:info@carshaltontennis.org">info@carshaltontennis.org</a>
+        <a href="https://wa.me/447356091428" aria-label="Message 07356 091428 on WhatsApp" title="Message the club on WhatsApp"><svg class="contact-icon" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2a9.94 9.94 0 0 0-8.6 14.95L2 22l5.18-1.36A9.97 9.97 0 1 0 12.04 2Zm0 18.15a8.2 8.2 0 0 1-4.18-1.14l-.3-.18-3.07.8.82-2.99-.2-.31a8.19 8.19 0 1 1 6.93 3.82Zm4.49-6.13c-.25-.12-1.46-.72-1.68-.8-.23-.08-.39-.12-.56.12-.16.25-.64.8-.78.96-.14.17-.29.19-.53.06-.25-.12-1.04-.38-1.98-1.22-.73-.65-1.22-1.45-1.37-1.7-.14-.24-.01-.37.11-.49.11-.11.25-.29.37-.43.12-.14.16-.24.25-.4.08-.16.04-.31-.02-.43-.06-.12-.56-1.35-.76-1.85-.2-.48-.41-.41-.56-.42h-.47c-.16 0-.43.06-.66.31-.22.25-.86.84-.86 2.06s.88 2.4 1 2.56c.12.16 1.73 2.64 4.19 3.7.58.25 1.03.4 1.39.51.58.19 1.1.16 1.52.1.46-.07 1.46-.59 1.67-1.16.2-.57.2-1.06.14-1.16-.06-.1-.22-.16-.47-.28Z"/></svg>07356 091428</a>
       </address>
     </section>
   </main>
@@ -529,51 +542,8 @@
     document.querySelectorAll('.mobile-menu a[href^="#"]').forEach(link => {
       link.addEventListener('click', () => link.closest('details').open = false);
     });
-    const galleryItems = Array.from(document.querySelectorAll('[data-gallery-item]'));
-    const galleryDialog = document.querySelector('.gallery-lightbox');
-
-    if (galleryItems.length && galleryDialog) {
-      const galleryImage = galleryDialog.querySelector('img');
-      const galleryCaption = galleryDialog.querySelector('figcaption');
-      const closeButton = galleryDialog.querySelector('.gallery-lightbox-close');
-      const previousButton = galleryDialog.querySelector('.gallery-lightbox-prev');
-      const nextButton = galleryDialog.querySelector('.gallery-lightbox-next');
-      let currentGalleryIndex = 0;
-
-      const showGalleryItem = (index) => {
-        currentGalleryIndex = (index + galleryItems.length) % galleryItems.length;
-        const item = galleryItems[currentGalleryIndex];
-        const image = item.querySelector('img');
-        const caption = item.dataset.caption || image.alt;
-        galleryImage.src = item.href;
-        galleryImage.alt = image.alt;
-        galleryCaption.textContent = caption;
-      };
-
-      galleryItems.forEach((item, index) => {
-        item.addEventListener('click', (event) => {
-          event.preventDefault();
-          showGalleryItem(index);
-          galleryDialog.showModal();
-        });
-      });
-
-      closeButton.addEventListener('click', () => galleryDialog.close());
-      previousButton.addEventListener('click', () => showGalleryItem(currentGalleryIndex - 1));
-      nextButton.addEventListener('click', () => showGalleryItem(currentGalleryIndex + 1));
-
-      galleryDialog.addEventListener('click', (event) => {
-        if (event.target === galleryDialog) {
-          galleryDialog.close();
-        }
-      });
-
-      galleryDialog.addEventListener('keydown', (event) => {
-        if (event.key === 'ArrowLeft') showGalleryItem(currentGalleryIndex - 1);
-        if (event.key === 'ArrowRight') showGalleryItem(currentGalleryIndex + 1);
-      });
-    }
   </script>
+  <script src="gallery.js"></script>
 </body>
 
 </html>

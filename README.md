@@ -7,6 +7,7 @@ Static website for GitHub Pages, served from the repository root. Open `index.ht
 - `index.html` and `history.html`: club website and history.
 - `assets/`: website images, logos and venue badge.
 - `newsletters/`: public newsletter index and published May 2026 issue.
+- `policies/`: policy index and local PDF copies retrieved from the club's previous policies page. Confirm these are the current approved versions.
 - CSS files: homepage, history and newsletter index styling. The May issue has its own styles and assets.
 
 This is a public repository. The May newsletter's player-contact PDF and link have been omitted to protect members' privacy. Do not add private documents or unpublished newsletters without approval.
