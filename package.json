@@ -1,0 +1,17 @@
+{
+  "name": "cltc-website",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build:newsletters": "node scripts/build-newsletters.mjs",
+    "check:newsletters": "node scripts/build-newsletters.mjs --check",
+    "test": "node --test tests/*.test.mjs"
+  },
+  "devDependencies": {
+    "axe-core": "4.14.0",
+    "playwright": "1.65.0"
+  }
+}

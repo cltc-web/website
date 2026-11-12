@@ -22,7 +22,8 @@ a:focus-visible, button:focus-visible { outline: 3px solid #b46a21; outline-offs
 .review-options a { padding: 5px 12px; border-radius: 4px; color: #dfe6e2; }
 .review-options a[aria-current] { background: #fff; color: #202a27; }
 .review-bar > span { color: #c4d0ca; }
-.concept .site-header { padding: 15px 3vw; gap: 18px; background: var(--paper); backdrop-filter: none; }
+/* Header-local theme classes keep secondary-page content in its existing theme. */
+.concept .site-header, .site-header.concept { padding: 15px 3vw; gap: 18px; background: var(--paper); backdrop-filter: none; }
 .concept .brand { max-width: 250px; font-size: 16px; line-height: 1.18; font-weight: 750; }
 .concept .brand img { width: 46px; height: 46px; }
 .concept nav { gap: 0; }
@@ -167,7 +168,7 @@ a:focus-visible, button:focus-visible { outline: 3px solid #b46a21; outline-offs
   .review-bar > span { display: none; }
 }
 @media (min-width: 901px) and (max-width: 1150px) {
-  .concept .site-header { gap: 10px; padding: 12px 18px; }
+  .concept .site-header, .site-header.concept { gap: 10px; padding: 12px 18px; }
   .concept .brand { max-width: 180px; font-size: 12px; gap: 7px; }
   .concept .brand img { width: 36px; height: 36px; }
   .concept nav a { font-size: 10px; padding: 9px 5px; }
@@ -178,7 +179,7 @@ a:focus-visible, button:focus-visible { outline: 3px solid #b46a21; outline-offs
   html { scroll-padding-top: 16px; }
   .review-bar { flex-wrap: wrap; justify-content: center; padding: 8px 14px; gap: 8px 20px; }
   .review-bar > span { display: none; }
-  .concept .site-header { position: static; padding: 16px 20px; }
+  .concept .site-header, .site-header.concept { position: static; padding: 16px 20px; }
   .concept .brand { max-width: 260px; }
   .concept nav a { font-size: 13px; padding: 9px; }
   .classic .hero, .community .hero { gap: 32px; padding: 40px 0; grid-template-columns: 1fr 1fr; }
@@ -200,7 +201,7 @@ a:focus-visible, button:focus-visible { outline: 3px solid #b46a21; outline-offs
   .review-bar { font-size: 10px; }
   .review-options { gap: 2px; }
   .review-options a { padding: 5px 7px; }
-  .concept .site-header { padding: 14px; }
+  .concept .site-header, .site-header.concept { padding: 14px; }
   .concept .brand { font-size: 13px; gap: 8px; }
   .concept .brand img { width: 38px; height: 38px; }
   .concept .header-sponsor img { width: 66px; }
@@ -254,6 +255,6 @@ a:focus-visible, button:focus-visible { outline: 3px solid #b46a21; outline-offs
 }
 @media print {
   .review-bar, .skip-link { display: none; }
-  .concept .site-header { position: static; }
+  .concept .site-header, .site-header.concept { position: static; }
   .concept { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
 }

@@ -34,6 +34,10 @@ a {
   color: inherit;
 }
 
+img {
+  height: auto;
+}
+
 .newsletter-page {
   max-width: 920px;
   margin: 0 auto;
@@ -354,6 +358,24 @@ h1 {
   gap: 14px;
 }
 
+/* Keep wide tables inside a named, keyboard-scrollable region on screen. */
+@media screen {
+  .table-scroll {
+    min-width: 0;
+    max-width: 100%;
+    overflow-x: auto;
+  }
+
+  .results-grid > .table-scroll {
+    display: grid;
+  }
+
+  .table-scroll:focus-visible {
+    outline: 3px solid var(--club-green-dark);
+    outline-offset: 3px;
+  }
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
@@ -515,6 +537,12 @@ tr:last-child td {
   margin: 8px 0 0;
   color: rgba(255, 255, 255, 0.84);
   font-size: 13px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 @media (max-width: 760px) {

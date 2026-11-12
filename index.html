@@ -35,21 +35,21 @@
 
 <body class="concept community iteration iteration-c c-mobile c-mobile-2">
   <a class="skip-link" href="#top">Skip to content</a>
+  <!-- Generated site header: run npm run build:newsletters -->
   <header class="site-header">
     <a class="brand" href="#top" aria-label="Carshalton Lawn Tennis Club home">
       <img src="assets/logo.png" alt="" width="56" height="56">
       <span>Carshalton Lawn Tennis Club</span>
     </a>
     <div class="header-credentials" aria-label="Club sponsor and LTA registration">
-      <a class="header-sponsor" href="https://www.bocconstruction.co.uk/"
-        aria-label="BOC Construction Services sponsor">
+      <a class="header-sponsor" href="https://www.bocconstruction.co.uk/">
         <span>Sponsored by</span>
-        <img src="assets/boc-construction-services.png" alt="BOC Construction Services">
+        <img src="assets/boc-construction-services.png" alt="BOC Construction Services" width="600" height="150">
       </a>
       <img class="header-lta" src="assets/lta-registered-venue-2024-25.png"
-        alt="LTA registered venue 2024/25">
+        alt="LTA registered venue 2024/25" width="274" height="200">
     </div>
-    <nav class="desktop-nav" aria-label="Page sections">
+    <nav class="desktop-nav" aria-label="Site navigation">
       <a href="#about">About</a>
       <a href="#play">Play</a>
       <a href="#competitive">Teams</a>
@@ -62,19 +62,20 @@
     </nav>
     <details class="mobile-menu">
       <summary>Menu <span aria-hidden="true">☰</span></summary>
-      <nav aria-label="Mobile page sections">
-      <a href="#about">About</a>
-      <a href="#play">Play</a>
-      <a href="#competitive">Teams</a>
-      <a href="#coaching">Coaching</a>
-      <a href="#programme">Programme</a>
-      <a href="#gallery">Gallery</a>
-      <a href="#fees">Fees</a>
-      <a href="#newsletters">Newsletters</a>
-      <a href="#contacts">Contacts</a>
-    </nav>
+      <nav aria-label="Mobile site navigation">
+        <a href="#about">About</a>
+        <a href="#play">Play</a>
+        <a href="#competitive">Teams</a>
+        <a href="#coaching">Coaching</a>
+        <a href="#programme">Programme</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#fees">Fees</a>
+        <a href="#newsletters">Newsletters</a>
+        <a href="#contacts">Contacts</a>
+      </nav>
     </details>
   </header>
+  <!-- End generated site header -->
 
   <main id="top">
     <section class="hero" aria-label="Welcome to the club">
@@ -447,12 +448,14 @@
           member reminders.</p>
       </div>
       <div class="newsletter-simple-list homepage-newsletter-list">
+        <!-- Generated newsletter cards: run npm run build:newsletters -->
         <a class="newsletter-simple-card" href="newsletters/2026-05/index.html"
           data-goatcounter-click="newsletter-may-2026">
           <span>Latest issue</span>
           <strong>May 2026 newsletter</strong>
           <p>Club news, tournament updates, team tennis, junior tennis, box leagues and member reminders.</p>
         </a>
+        <!-- End generated newsletter cards -->
       </div>
       <div class="actions">
         <a class="button primary compact" href="newsletters/index.html"
@@ -552,12 +555,7 @@
     <a href="#top">Back to top ↑</a>
     <a href="history.html">Club history →</a>
   </footer>
-  <script>
-    // Anchor navigation should not leave the mobile menu over the destination.
-    document.querySelectorAll('.mobile-menu a[href^="#"]').forEach(link => {
-      link.addEventListener('click', () => link.closest('details').open = false);
-    });
-  </script>
+  <script src="navigation.js"></script>
   <script src="gallery.js"></script>
 </body>
 

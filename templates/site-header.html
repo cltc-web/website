@@ -1,0 +1,23 @@
+  <header class="site-header{{headerClasses}}">
+    <a class="brand" href="{{brandHref}}" aria-label="Carshalton Lawn Tennis Club home">
+      <img src="{{assetRoot}}logo.png" alt="" width="56" height="56">
+      <span>Carshalton Lawn Tennis Club</span>
+    </a>
+    <div class="header-credentials" aria-label="Club sponsor and LTA registration">
+      <a class="header-sponsor" href="https://www.bocconstruction.co.uk/">
+        <span>Sponsored by</span>
+        <img src="{{assetRoot}}boc-construction-services.png" alt="BOC Construction Services" width="600" height="150">
+      </a>
+      <img class="header-lta" src="{{assetRoot}}lta-registered-venue-2024-25.png"
+        alt="LTA registered venue 2024/25" width="274" height="200">
+    </div>
+    <nav class="desktop-nav" aria-label="Site navigation">
+{{desktopLinks}}
+    </nav>
+    <details class="mobile-menu">
+      <summary>Menu <span aria-hidden="true">☰</span></summary>
+      <nav aria-label="Mobile site navigation">
+{{mobileLinks}}
+      </nav>
+    </details>
+  </header>

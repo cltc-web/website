@@ -17,6 +17,11 @@
     background: #ffffff;
   }
 
+  /* Restore tables as direct grid items; screen scrolling must not affect pagination. */
+  .table-scroll {
+    display: contents;
+  }
+
   .newsletter-page {
     width: 100%;
     max-width: 920px;
