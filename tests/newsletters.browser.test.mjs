@@ -11,7 +11,7 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 let browser, server, origin;
 
 before(async () => {
-  const types = { '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.pdf': 'application/pdf' };
+  const types = { '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.svg': 'image/svg+xml', '.pdf': 'application/pdf' };
   server = createServer(async (request, response) => {
     try {
       let pathname = decodeURIComponent(new URL(request.url, 'http://localhost').pathname);
@@ -127,10 +127,10 @@ test('newsletter header theme does not restyle the existing archive content', as
   } finally { await page.close(); }
 });
 
-test('newsletter index and May issue pass sampled WCAG accessibility checks', async () => {
+test('newsletter and coaching pages pass sampled WCAG accessibility checks', async () => {
   const page = await newPage();
   try {
-    for (const route of ['newsletters/index.html', 'newsletters/2026-05/index.html']) {
+    for (const route of ['newsletters/index.html', 'newsletters/2026-05/index.html', 'juniors.html', 'coaching.html']) {
       for (const width of [320, 375, 1024, 1440]) {
         await page.setViewportSize({ width, height: 900 });
         await page.goto(`${origin}/${route}`);
@@ -184,6 +184,231 @@ test('May images declare correct intrinsic dimensions and print retains desktop 
     assert.equal(await columns('.results-grid'), 2);
     assert.equal(await columns('.qr-row'), 3);
     assert.ok(await page.locator('.table-scroll').evaluateAll(es => es.every(e => getComputedStyle(e).display === 'contents')));
+  } finally { await page.close(); }
+});
+
+test('junior page explains assessment, matches membership prices and works without JavaScript', async () => {
+  const page = await newPage({ javaScriptEnabled: false, viewport: { width: 375, height: 812 } });
+  try {
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await page.goto(`${origin}/index.html`);
+    const homeRates = await page.locator('.membership-options .fee-card').evaluateAll(cards => Object.fromEntries(
+      cards.map(card => [card.querySelector('h3').textContent, card.querySelector('.price').textContent])));
+    assert.equal(await page.locator('.junior-panel a[href="juniors.html"]').count(), 1);
+    await page.locator('.service-list a[href="juniors.html"]').click();
+    await page.waitForURL('**/juniors.html');
+    assert.equal(await page.locator('h1').textContent(), 'Junior tennis and coaching.');
+    assert.match(await page.locator('.group-guidance').textContent(), /assessed the player/);
+    assert.doesNotMatch(await page.locator('main').textContent(), /timetable/i);
+    assert.deepEqual(await page.locator('.junior-rates .rate-value').allTextContents(),
+      [homeRates['Under 5'], homeRates['Junior 5-10'], homeRates['Junior 11-18']]);
+    assert.deepEqual(await page.locator('.reduced-rate').allTextContents(), ['£10.20', '£45', '£55.20']);
+    assert.match(await page.locator('.coaching-cost-note').textContent(), /not lessons or holiday camps/);
+    const contacts = page.locator('#coaches .coach-card a');
+    assert.deepEqual(await contacts.evaluateAll(es => es.map(e => e.href)),
+      ['https://wa.me/447720941494', 'https://wa.me/447928091993']);
+    assert.ok(await contacts.evaluateAll(es => es.every(e => e.hasAttribute('data-goatcounter-click'))));
+    for (const width of [320, 375, 620, 768, 1024, 1440]) {
+      await page.setViewportSize({ width, height: 900 });
+      assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `Junior page overflows at ${width}px`);
+    }
+    await page.locator('.junior-header a[href="index.html#coaching"]').click();
+    await page.waitForURL('**/index.html#coaching');
+  } finally { await page.close(); }
+});
+
+test('adult coaching links, provisional evening groups and separate charges work without JavaScript', async () => {
+  const page = await newPage({ javaScriptEnabled: false, viewport: { width: 375, height: 812 } });
+  try {
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await page.goto(`${origin}/index.html`);
+    assert.equal(await page.locator('#coaching a[href="coaching.html"]').count(), 1);
+    assert.match(await page.locator('#coaching .section-heading').textContent(), /Coaching fees are additional to club membership/);
+    const homeAdultRates = await page.locator('.membership-core .price').allTextContents();
+    await page.locator('.service-list a[href="coaching.html"]').click();
+    await page.waitForURL('**/coaching.html');
+    assert.equal(await page.locator('h1').textContent(), 'Adult tennis coaching.');
+    const adultHero = page.locator('.coaching-welcome img');
+    assert.equal(await adultHero.getAttribute('src'), 'assets/gallery/IMG_2266.jpeg');
+    assert.equal(await adultHero.getAttribute('alt'), 'Adult players on the hard courts at Carshalton Lawn Tennis Club');
+    assert.match(await page.locator('.coaching-welcome figcaption').textContent(), /Adult tennis on the hard courts/);
+    assert.match(await page.locator('.lesson-guidance').textContent(), /One-to-one coaching/);
+    assert.match(await page.locator('.coaching-charge-note').textContent(), /additional to club membership/);
+    assert.deepEqual(await page.locator('.adult-rates h3').allTextContents(), ['Full adult', 'Midweek adult', 'Family membership']);
+    assert.deepEqual(await page.locator('.adult-rates .rate-value').allTextContents(), homeAdultRates);
+    assert.match(await page.locator('.coaching-cost-note').textContent(), /not individual lessons or group coaching/);
+    assert.equal(await page.locator('#coaching-costs a[data-goatcounter-click="adult-membership"]').getAttribute('href'),
+      'https://clubspark.lta.org.uk/CarshaltonLTC/Membership/Join');
+    assert.deepEqual(await page.locator('.session-card h3').allTextContents(), ['Monday evening', 'Wednesday evening']);
+    assert.match(await page.locator('.session-review-note').textContent(), /still need confirmation/);
+    for (const card of await page.locator('.session-card').all()) {
+      assert.deepEqual(await card.locator('dd').allTextContents(),
+        ['To be confirmed', 'To be confirmed — the coach will advise on a suitable group.', 'To be confirmed']);
+    }
+    const contacts = page.locator('#coaches .coach-card a');
+    assert.deepEqual(await contacts.evaluateAll(es => es.map(e => e.href)),
+      ['https://wa.me/447720941494', 'https://wa.me/447928091993']);
+    assert.ok(await contacts.evaluateAll(es => es.every(e => e.hasAttribute('data-goatcounter-click'))));
+    for (const width of [320, 375, 620, 768, 1024, 1440]) {
+      await page.setViewportSize({ width, height: 900 });
+      assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `Adult coaching overflows at ${width}px`);
+    }
+    await page.locator('.junior-coaching-link a').click();
+    await page.waitForURL('**/juniors.html');
+    assert.doesNotMatch(await page.locator('main').textContent(), /timetable/i);
+    await page.goto(`${origin}/coaching.html`);
+    await page.locator('.coaching-header a[href="index.html#coaching"]').click();
+    await page.waitForURL('**/index.html#coaching');
+  } finally { await page.close(); }
+});
+
+test('table tennis page is clearly provisional and works without JavaScript', async () => {
+  const page = await newPage({ javaScriptEnabled: false, viewport: { width: 375, height: 812 } });
+  try {
+    await page.goto(`${origin}/index.html`);
+    assert.equal(await page.locator('.service-list a[href="table-tennis.html"]').count(), 1);
+    await page.locator('.service-list a[href="table-tennis.html"]').click();
+    await page.waitForURL('**/table-tennis.html');
+    assert.equal(await page.locator('h1').textContent(), 'Table tennis at the clubhouse.');
+    const hero = page.locator('.table-tennis-welcome img');
+    assert.equal(await hero.getAttribute('src'), 'assets/gallery/table-tennis-match.jpg');
+    assert.equal(await hero.getAttribute('alt'), 'Two players competing in a table tennis match in the clubhouse');
+    assert.match(await page.locator('.draft-notice').textContent(), /Draft information for committee review/);
+    assert.equal(await page.locator('.table-tennis-grid .provisional').count(), 3);
+    assert.ok(await page.locator('.table-tennis-grid .provisional').allTextContents()
+      .then(messages => messages.every(message => /to be confirmed/.test(message))));
+    const contact = page.locator('#contact a[data-goatcounter-click="table-tennis-lewis-whatsapp"]');
+    assert.equal(await contact.getAttribute('href'), 'https://wa.me/447985304405');
+    const membershipEmail = page.locator('#contact a[data-goatcounter-click="table-tennis-membership-email"]');
+    assert.equal(await membershipEmail.getAttribute('href'), 'mailto:cltcmembership@gmail.com?subject=Table%20tennis%20enquiry');
+    assert.equal(await page.locator('#contact a[href="index.html#fees"]').count(), 0);
+    assert.match(await page.locator('#contact .membership-help').textContent(), /separately from LTA tennis membership/);
+    for (const width of [320, 375, 620, 768, 1024, 1440]) {
+      await page.setViewportSize({ width, height: 900 });
+      assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `Table tennis page overflows at ${width}px`);
+    }
+    await page.locator('.table-tennis-header a[href="index.html#play"]').click();
+    await page.waitForURL('**/index.html#play');
+  } finally { await page.close(); }
+});
+
+test('gallery includes all primary page hero photographs', async () => {
+  const page = await newPage();
+  try {
+    await page.goto(`${origin}/gallery.html`);
+    const galleryPhotos = await page.locator('#gallery-photos a[data-gallery-item]').evaluateAll(links =>
+      links.map(link => link.getAttribute('href')));
+    assert.deepEqual(
+      ['assets/gallery/club-aerial-overview.jpg', 'assets/gallery/IMG_2266.jpeg',
+        'assets/gallery/junior-tennis-cropped.jpg', 'assets/gallery/table-tennis-match.jpg'].map(photo =>
+        galleryPhotos.includes(photo)),
+      [true, true, true, true]);
+  } finally { await page.close(); }
+});
+
+test('homepage aerial remains a complete landscape image at desktop and tablet widths', async () => {
+  const page = await newPage();
+  try {
+    for (const width of [1024, 1440]) {
+      await page.setViewportSize({ width, height: 900 });
+      await page.goto(`${origin}/index.html`);
+      const aerial = page.locator('.hero-media img');
+      assert.equal(await aerial.getAttribute('src'), 'assets/gallery/club-aerial-overview.jpg');
+      const imageSizing = await aerial.evaluate(async image => {
+        await image.decode();
+        const box = image.getBoundingClientRect();
+        return {
+          objectFit: getComputedStyle(image).objectFit,
+          displayedRatio: box.width / box.height,
+          naturalRatio: image.naturalWidth / image.naturalHeight
+        };
+      });
+      assert.equal(imageSizing.objectFit, 'contain');
+      assert.ok(Math.abs(imageSizing.displayedRatio - imageSizing.naturalRatio) < 0.001);
+    }
+  } finally { await page.close(); }
+});
+
+test('approved junior photo and coach silhouettes appear across all three pages', async () => {
+  const page = await newPage();
+  try {
+    for (const route of ['index.html', 'coaching.html', 'juniors.html']) {
+      await page.goto(`${origin}/${route}`);
+      const portraits = page.locator('.coach-card .coach-photo');
+      assert.equal(await portraits.count(), 2);
+      assert.deepEqual(await page.locator('.coach-photo-note').allTextContents(), ['Photo to follow', 'Photo to follow']);
+      assert.ok(await portraits.evaluateAll(async images => {
+        await Promise.all(images.map(image => image.decode()));
+        return images.every(image => image.getAttribute('src') === 'assets/coach-photo-placeholder.svg' &&
+          image.alt.includes('Placeholder portrait') && image.naturalWidth === 140 && image.naturalHeight === 180);
+      }));
+      for (const width of [320, 390, 768, 1440]) {
+        await page.setViewportSize({ width, height: 900 });
+        assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `${route} overflows at ${width}px`);
+      }
+      if (route === 'index.html') assert.equal(await page.locator('#contacts .coach-photo').count(), 0);
+    }
+    const juniorPhoto = page.locator('.junior-welcome figure img');
+    assert.equal(await juniorPhoto.getAttribute('src'), 'assets/gallery/junior-tennis-cropped.jpg?v=red-ball-20261118');
+    assert.equal(await juniorPhoto.getAttribute('width'), '1200');
+    assert.equal(await juniorPhoto.getAttribute('height'), '800');
+    assert.equal(await juniorPhoto.getAttribute('alt'), 'Children playing Red Ball tennis at the club');
+    assert.match(await page.locator('.junior-welcome figcaption').textContent(), /Red Ball tennis at Carshalton/);
+    assert.ok(await juniorPhoto.evaluate(async image => {
+      await image.decode();
+      return image.naturalWidth === 1200 && image.naturalHeight === 800;
+    }));
+  } finally { await page.close(); }
+});
+
+test('homepage gives adult and junior coaching matching panels below the coaches', async () => {
+  const page = await newPage({ javaScriptEnabled: false });
+  try {
+    await page.goto(`${origin}/index.html`);
+    const panels = page.locator('#coaching > .junior-panel');
+    assert.deepEqual(await panels.locator('h3').allTextContents(), ['Adult coaching', 'Junior tennis']);
+    assert.equal(await page.locator('#coaching .section-heading a').count(), 0);
+    assert.equal(await page.locator('#coaching .coach-card').count(), 2);
+    assert.equal(await page.locator('#coaching .coach-photo').count(), 2);
+    assert.equal(await panels.nth(0).locator('.button.primary').getAttribute('href'), 'coaching.html');
+    assert.equal(await panels.nth(1).locator('.button.primary').getAttribute('href'), 'juniors.html');
+    for (const panel of await panels.all()) {
+      assert.equal(await panel.locator('.button').count(), 2);
+      assert.equal(await panel.locator('.button.secondary').getAttribute('href'), 'https://wa.me/447720941494');
+    }
+    for (const width of [320, 390, 768, 1024, 1440]) {
+      await page.setViewportSize({ width, height: 900 });
+      const adult = await panels.nth(0).locator('.button.primary').boundingBox();
+      const junior = await panels.nth(1).locator('.button.primary').boundingBox();
+      assert.ok(Math.abs(adult.width - junior.width) < 1, `Coaching buttons have different widths at ${width}px`);
+      assert.ok(Math.abs(adult.x - junior.x) < 1, `Coaching buttons are not aligned at ${width}px`);
+      assert.ok(adult.x >= 0 && adult.x + adult.width <= width, `Coaching panel overflows at ${width}px`);
+    }
+  } finally { await page.close(); }
+});
+
+test('membership highlights three main options and expands other rates without JavaScript', async () => {
+  const page = await newPage({ javaScriptEnabled: false });
+  try {
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    for (const width of [320, 768, 1440]) {
+      await page.setViewportSize({ width, height: 900 });
+      await page.goto(`${origin}/index.html#fees`);
+      assert.deepEqual(await page.locator('#fees .fee-card:visible h3').allTextContents(),
+        ['Full adult', 'Midweek adult', 'Family membership']);
+      assert.deepEqual(await page.locator('.membership-core .price').allTextContents(), ['£266', '£196', '£545']);
+      const summary = page.locator('.membership-options summary');
+      await summary.focus();
+      assert.notEqual(await summary.evaluate(e => getComputedStyle(e).outlineStyle), 'none');
+      await summary.press('Enter');
+      assert.equal(await page.locator('.membership-options').getAttribute('open'), '');
+      assert.equal(await page.locator('#fees .fee-card:visible').count(), 9);
+      assert.deepEqual(await page.locator('.membership-options .price').allTextContents(),
+        ['£125', '£92', '£75', '£17', '£50', '£35']);
+      assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `Membership overflows at ${width}px`);
+      await summary.press('Enter');
+      assert.equal(await page.locator('#fees .fee-card:visible').count(), 3);
+    }
   } finally { await page.close(); }
 });
 

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="140" height="180" viewBox="0 0 140 180" role="img" aria-labelledby="title desc">
+  <title id="title">Coach photograph placeholder</title>
+  <desc id="desc">A neutral head-and-shoulders silhouette. Replace with an approved coach portrait.</desc>
+  <rect x="1" y="1" width="138" height="178" rx="8" fill="#edf1e9" stroke="#a3b5a7" stroke-width="2" stroke-dasharray="5 4"/>
+  <circle cx="70" cy="57" r="25" fill="#82968a"/>
+  <path d="M23 151v-12c0-27 21-48 47-48s47 21 47 48v12Z" fill="#82968a"/>
+  <text x="70" y="167" text-anchor="middle" fill="#314c3e" font-family="Arial, sans-serif" font-size="9" font-weight="700" letter-spacing=".5">PHOTO PLACEHOLDER</text>
+</svg>

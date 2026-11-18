@@ -5,6 +5,8 @@ Static website for GitHub Pages, served from the repository root. Open `index.ht
 ## Contents
 
 - `index.html` and `history.html`: club website and history.
+- `juniors.html` and `juniors.css`: junior coaching and membership information, linked from the homepage. Coaches recommend groups after assessing players; do not add a junior timetable.
+- `coaching.html` and `coaching.css`: adult individual lessons and Monday/Wednesday evening groups. Exact group times, levels and prices are pending committee confirmation; coaching charges are additional to membership.
 - `assets/`: website images, logos and venue badge.
 - `newsletters/`: public newsletter index and published May 2026 issue.
 - `policies/`: policy index and local PDF copies retrieved from the club's previous policies page. Confirm these are the current approved versions.
@@ -51,7 +53,9 @@ Tests cover catalogue validation/escaping, generated HTML freshness, header over
 
 ## Before publishing
 
+- Replace the coach silhouettes with approved photographs. Confirm photo permissions before adding identifiable people to the gallery or other public pages.
 - Confirm fees, sessions, teams, coaching details, contact details and photo permissions.
+- Have the table tennis committee replace the provisional information in `table-tennis.html` with approved session, team and charge details before publishing.
 - Replace the 2024/25 LTA badge with a current approved asset.
 - Review the history's archival wording about “today” and the first 100 years.
 - Check the public newsletter and its linked documents before publication.

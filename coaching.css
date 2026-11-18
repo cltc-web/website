@@ -1,0 +1,75 @@
+/* Adult coaching information, using the same club theme as the junior page. */
+.adult-coaching-page main { width:min(1180px,calc(100% - 48px)); margin:0 auto; overflow:visible; }
+.adult-coaching-page .coaching-header { display:flex; align-items:center; justify-content:space-between; gap:24px; width:min(1180px,calc(100% - 48px)); margin:0 auto; padding:18px 0; border-bottom:1px solid var(--line); }
+.adult-coaching-page nav { display:flex; flex-wrap:wrap; justify-content:flex-end; gap:20px; width:auto; padding:0; border:0; overflow:visible; }
+.adult-coaching-page nav a { display:inline-flex; align-items:center; min-width:0; min-height:44px; flex:0 1 auto; padding:8px 0; border-radius:0; background:none; color:var(--green-dark); font-size:13px; }
+.adult-coaching-page h1 { font-size:clamp(2.8rem,4.8vw,4.4rem); max-width:14ch; }
+.adult-coaching-page h2 { font-size:clamp(1.8rem,3vw,2.5rem); }
+.adult-coaching-page p { line-height:1.75; }
+.adult-coaching-page .coaching-welcome { display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center; padding:44px 0; }
+.adult-coaching-page .coaching-welcome .intro { font-size:16px; }
+.adult-coaching-page .coaching-charge-note { font-size:14px; color:var(--green-dark); font-weight:700; }
+.adult-coaching-page .coaching-welcome figure { margin:0; border-radius:28px 12px 12px 12px; overflow:hidden; background:#dcefe4; }
+.adult-coaching-page .coaching-welcome img { display:block; width:100%; height:auto; aspect-ratio:1.5; object-fit:cover; }
+.adult-coaching-page .coaching-welcome figcaption { padding:10px 16px; font-size:12px; color:var(--green-dark); }
+.adult-coaching-page .adult-section { padding:40px 0; border-top:1px solid var(--line); }
+.adult-coaching-page .section-heading { max-width:800px; margin-bottom:24px; }
+.adult-coaching-page .lesson-guidance { padding:28px 32px; border-left:4px solid var(--green); border-radius:0 12px 12px 0; background:#dcefe4; }
+.adult-coaching-page .lesson-guidance p { max-width:800px; font-size:16px; }
+.adult-coaching-page .lesson-guidance p:last-child { margin-bottom:0; }
+.adult-coaching-page .session-review-note { padding:18px 22px; background:#f8edcf; border-left:3px solid #a06528; color:#614e32; font-size:14px; margin-bottom:24px; }
+.adult-coaching-page .adult-group-grid { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+.adult-coaching-page .session-card { padding:26px; border-radius:12px; background:#e6ecdf; }
+.adult-coaching-page .session-card:nth-child(2) { background:#f9dfd3; }
+.adult-coaching-page .session-card h3 { font-size:22px; color:var(--green-dark); margin-bottom:20px; }
+.adult-coaching-page .session-details { margin:0; display:grid; gap:16px; }
+.adult-coaching-page .session-details > div { display:grid; grid-template-columns:90px 1fr; gap:16px; }
+.adult-coaching-page .session-details dt { font-size:14px; font-weight:750; color:var(--green-dark); }
+.adult-coaching-page .session-details dd { margin:0; font-size:14px; color:var(--muted); line-height:1.7; }
+.adult-coaching-page .coach-grid { margin-bottom:0; }
+.adult-coaching-page .coach-card { padding:26px; border-radius:12px; }
+.adult-coaching-page .coach-card h3 { font-size:22px; }
+.adult-coaching-page .coach-card p:not(.coach-meta) { font-size:14px; }
+.adult-coaching-page .coach-card .coach-meta { font-size:11px; }
+.adult-coaching-page .coach-card a { display:inline-block; padding-block:5px; font-size:14px; overflow-wrap:anywhere; }
+.adult-coaching-page .coaching-cost-note { max-width:850px; padding:16px 20px; margin:0 0 24px; border:1px solid var(--line); border-radius:10px; font-size:14px; color:var(--green-dark); }
+.adult-coaching-page .adult-rates { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; }
+.adult-coaching-page .adult-rates .fee-card { min-height:0; border-radius:12px; padding:24px; }
+.adult-coaching-page .adult-rates h3 { font-size:20px; color:var(--green-dark); }
+.adult-coaching-page .adult-rates .rate-period { font-size:13px; font-weight:500; letter-spacing:0; color:var(--muted); }
+.adult-coaching-page .membership-help { margin:22px 0 0; font-size:14px; color:var(--muted); }
+.adult-coaching-page .membership-help a { color:var(--green); font-weight:750; text-underline-offset:4px; }
+.adult-coaching-page .junior-coaching-link { margin:24px 0 0; font-size:14px; color:var(--muted); }
+.adult-coaching-page .junior-coaching-link a { color:var(--green); font-weight:750; text-underline-offset:4px; }
+.adult-coaching-page .actions { margin-top:24px; }
+.adult-coaching-page .coaching-footer { width:min(1180px,calc(100% - 48px)); border-top:1px solid var(--line); }
+@media (max-width:900px) {
+  .adult-coaching-page .coaching-welcome { gap:32px; }
+  .adult-coaching-page h1 { font-size:clamp(2.5rem,5vw,3.6rem); }
+}
+@media (max-width:620px) {
+  .adult-coaching-page main, .adult-coaching-page .coaching-header, .adult-coaching-page .coaching-footer { width:calc(100% - 36px); }
+  .adult-coaching-page .coaching-header { flex-direction:column; align-items:flex-start; gap:8px; padding:16px 0; }
+  .adult-coaching-page nav { justify-content:flex-start; gap:8px 20px; }
+  .adult-coaching-page nav a { font-size:12px; }
+  .adult-coaching-page .coaching-welcome { grid-template-columns:1fr; gap:24px; padding:28px 0; }
+  .adult-coaching-page h1 { font-size:clamp(2.6rem,10vw,3.3rem); }
+  .adult-coaching-page .coaching-welcome .intro { font-size:15px; }
+  .adult-coaching-page .coaching-welcome figure { border-radius:12px; }
+  .adult-coaching-page .coaching-welcome img { aspect-ratio:1.8; }
+  .adult-coaching-page .coaching-welcome figcaption { font-size:11px; padding:8px 12px; }
+  .adult-coaching-page .coaching-welcome .actions .button { flex:1 1 145px; width:auto; padding:13px 16px; gap:12px; }
+  .adult-coaching-page .adult-section { padding:30px 0; }
+  .adult-coaching-page .lesson-guidance { padding:22px; }
+  .adult-coaching-page .lesson-guidance p { font-size:15px; }
+  .adult-coaching-page .adult-group-grid, .adult-coaching-page .coach-grid, .adult-coaching-page .adult-rates { grid-template-columns:1fr; gap:18px; }
+  .adult-coaching-page .session-card, .adult-coaching-page .coach-card, .adult-coaching-page .adult-rates .fee-card { padding:22px; }
+  .adult-coaching-page .adult-rates .price { margin-bottom:12px; }
+  .adult-coaching-page .session-card h3, .adult-coaching-page .coach-card h3 { font-size:20px; }
+  .adult-coaching-page .session-details > div { grid-template-columns:70px 1fr; gap:14px; }
+}
+@media print {
+  .adult-coaching-page .coaching-header, .adult-coaching-page .skip-link { display:none; }
+  .adult-coaching-page .adult-section { padding:20px 0; }
+  .adult-coaching-page .coach-card, .adult-coaching-page .session-card, .adult-coaching-page .fee-card { break-inside:avoid; }
+}

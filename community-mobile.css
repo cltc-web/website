@@ -12,7 +12,7 @@
   .c-mobile-3 .hero-media, .c-mobile-3 .hero-social { display:none; }
   .c-mobile-2 .hero { grid-template-columns:minmax(0,1fr); }
   .c-mobile-2 .hero-media { grid-column:1; border-radius:14px; }
-  .c-mobile-2 .hero-media img { height:auto; aspect-ratio:1.9; }
+  .c-mobile-2 .hero-media img { height:auto; aspect-ratio:auto; object-fit:contain; }
   .c-mobile-2 .hero-media figcaption { display:block; padding:8px 12px; }
   .c-mobile-2 .hero-social { display:none; }
   .c-mobile-3 .hero { padding-bottom:0; }

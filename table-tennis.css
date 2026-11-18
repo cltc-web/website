@@ -1,0 +1,65 @@
+/* Provisional table tennis page, matching the adult coaching page's layout. */
+.table-tennis-page main { width:min(1180px,calc(100% - 48px)); margin:0 auto; overflow:visible; }
+.table-tennis-page .table-tennis-header { display:flex; align-items:center; justify-content:space-between; gap:24px; width:min(1180px,calc(100% - 48px)); margin:0 auto; padding:18px 0; border-bottom:1px solid var(--line); }
+.table-tennis-page nav { display:flex; flex-wrap:wrap; justify-content:flex-end; gap:20px; width:auto; padding:0; border:0; overflow:visible; }
+.table-tennis-page nav a { display:inline-flex; align-items:center; min-width:0; min-height:44px; flex:0 1 auto; padding:8px 0; border-radius:0; background:none; color:var(--green-dark); font-size:13px; }
+.table-tennis-page h1 { max-width:14ch; font-size:clamp(2.8rem,4.8vw,4.4rem); }
+.table-tennis-page h2 { font-size:clamp(1.8rem,3vw,2.5rem); }
+.table-tennis-page p { line-height:1.75; }
+.table-tennis-page .table-tennis-welcome { display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center; padding:44px 0; }
+.table-tennis-page .table-tennis-welcome .intro { font-size:16px; }
+.table-tennis-page .table-tennis-welcome figure { margin:0; border-radius:28px 12px 12px 12px; overflow:hidden; background:#dcefe4; }
+.table-tennis-page .table-tennis-welcome img { display:block; width:100%; height:auto; aspect-ratio:1.5; object-fit:cover; }
+.table-tennis-page .table-tennis-welcome figcaption { padding:10px 16px; font-size:12px; color:var(--green-dark); }
+.table-tennis-page .draft-notice { padding:14px 18px; border-left:3px solid #a06528; background:#f8edcf; color:#614e32; font-size:14px; }
+.table-tennis-page .table-tennis-section { padding:40px 0; border-top:1px solid var(--line); }
+.table-tennis-page .section-heading { max-width:800px; margin-bottom:24px; }
+.table-tennis-page .table-tennis-guidance { padding:28px 32px; border-left:4px solid var(--green); border-radius:0 12px 12px 0; background:#dcefe4; }
+.table-tennis-page .table-tennis-guidance p { max-width:800px; font-size:16px; }
+.table-tennis-page .table-tennis-guidance p:last-child { margin-bottom:0; }
+.table-tennis-page .table-tennis-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; }
+.table-tennis-page .table-tennis-grid article { padding:26px; border-radius:12px; background:#e6ecdf; }
+.table-tennis-page .table-tennis-grid article:nth-child(2) { background:#f9dfd3; }
+.table-tennis-page .table-tennis-grid article:nth-child(3) { background:#f8edcf; }
+.table-tennis-page .table-tennis-grid h3 { margin-bottom:12px; color:var(--green-dark); font-size:22px; }
+.table-tennis-page .table-tennis-grid p { margin-bottom:12px; font-size:14px; }
+.table-tennis-page .table-tennis-grid .provisional { margin-bottom:0; color:#614e32; font-weight:750; }
+.table-tennis-page .table-tennis-contact-card { display:flex; align-items:center; justify-content:space-between; gap:24px; padding:26px 30px; border-radius:12px; background:#dcefe4; }
+.table-tennis-page .table-tennis-contact-card h3 { margin:0 0 4px; color:var(--green-dark); font-size:22px; }
+.table-tennis-page .table-tennis-contact-card p { margin:0; font-size:14px; color:var(--muted); }
+.table-tennis-page .table-tennis-contact-actions { display:flex; flex-wrap:wrap; gap:12px; }
+.table-tennis-page .table-tennis-contact-actions .button { white-space:nowrap; }
+.table-tennis-page .membership-help { margin:22px 0 0; font-size:14px; color:var(--muted); }
+.table-tennis-page .membership-help a { color:var(--green); font-weight:750; text-underline-offset:4px; }
+.table-tennis-page .actions { margin-top:24px; }
+.table-tennis-page .table-tennis-footer { width:min(1180px,calc(100% - 48px)); border-top:1px solid var(--line); }
+@media (max-width:900px) {
+  .table-tennis-page .table-tennis-welcome { gap:32px; }
+  .table-tennis-page h1 { font-size:clamp(2.5rem,5vw,3.6rem); }
+}
+@media (max-width:620px) {
+  .table-tennis-page main, .table-tennis-page .table-tennis-header, .table-tennis-page .table-tennis-footer { width:calc(100% - 36px); }
+  .table-tennis-page .table-tennis-header { flex-direction:column; align-items:flex-start; gap:8px; padding:16px 0; }
+  .table-tennis-page nav { justify-content:flex-start; gap:8px 20px; }
+  .table-tennis-page nav a { font-size:12px; }
+  .table-tennis-page .table-tennis-welcome { grid-template-columns:1fr; gap:24px; padding:28px 0; }
+  .table-tennis-page h1 { font-size:clamp(2.6rem,10vw,3.3rem); }
+  .table-tennis-page .table-tennis-welcome .intro { font-size:15px; }
+  .table-tennis-page .table-tennis-welcome figure { border-radius:12px; }
+  .table-tennis-page .table-tennis-welcome img { aspect-ratio:1.8; }
+  .table-tennis-page .table-tennis-welcome figcaption { padding:8px 12px; font-size:11px; }
+  .table-tennis-page .table-tennis-welcome .actions .button { flex:1 1 145px; width:auto; padding:13px 16px; gap:12px; }
+  .table-tennis-page .table-tennis-section { padding:30px 0; }
+  .table-tennis-page .table-tennis-guidance { padding:22px; }
+  .table-tennis-page .table-tennis-guidance p { font-size:15px; }
+  .table-tennis-page .table-tennis-grid { grid-template-columns:1fr; gap:14px; }
+  .table-tennis-page .table-tennis-grid article { padding:22px; }
+  .table-tennis-page .table-tennis-contact-card { flex-direction:column; align-items:flex-start; padding:22px; }
+  .table-tennis-page .table-tennis-contact-actions { width:100%; }
+  .table-tennis-page .table-tennis-contact-actions .button { flex:1 1 190px; justify-content:center; }
+}
+@media print {
+  .table-tennis-page .table-tennis-header, .table-tennis-page .skip-link { display:none; }
+  .table-tennis-page .table-tennis-section { padding:20px 0; }
+  .table-tennis-page .table-tennis-grid article, .table-tennis-page .table-tennis-contact-card { break-inside:avoid; }
+}
