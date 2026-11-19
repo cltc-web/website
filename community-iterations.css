@@ -16,6 +16,7 @@
   .iteration .coach-card-heading { gap:14px; }
   .iteration .coach-card-heading .coach-photo { width:56px; height:72px; }
 }
+
 .iteration .history-link a { font-weight:750; color:var(--green-dark); text-underline-offset:4px; }
 /* Anchors sit on padded sections; offset that padding so the heading, not the border, lands near the viewport top. */
 @media (min-width:901px) {

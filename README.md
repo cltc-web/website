@@ -5,8 +5,8 @@ Static website for GitHub Pages, served from the repository root. Open `index.ht
 ## Contents
 
 - `index.html` and `history.html`: club website and history.
-- `juniors.html` and `juniors.css`: junior coaching and membership information, linked from the homepage. Coaches recommend groups after assessing players; do not add a junior timetable.
-- `coaching.html` and `coaching.css`: adult individual lessons and Monday/Wednesday evening groups. Exact group times, levels and prices are pending committee confirmation; coaching charges are additional to membership.
+- `table-tennis.html` and `table-tennis.css`: provisional table tennis information, separate from LTA tennis membership, pending table tennis committee review.
+- Coaching stays on the homepage: there are no separate adult or junior coaching pages and no published timetable. Coaches assess players before recommending a group, and the coaching section directs timetable and availability questions to the head coach. Coaching charges are additional to club membership.
 - `assets/`: website images, logos and venue badge.
 - `newsletters/`: public newsletter index and published May 2026 issue.
 - `policies/`: policy index and local PDF copies retrieved from the club's previous policies page. Confirm these are the current approved versions.

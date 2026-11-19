@@ -127,10 +127,10 @@ test('newsletter header theme does not restyle the existing archive content', as
   } finally { await page.close(); }
 });
 
-test('newsletter and coaching pages pass sampled WCAG accessibility checks', async () => {
+test('newsletter and table tennis pages pass sampled WCAG accessibility checks', async () => {
   const page = await newPage();
   try {
-    for (const route of ['newsletters/index.html', 'newsletters/2026-05/index.html', 'juniors.html', 'coaching.html']) {
+    for (const route of ['newsletters/index.html', 'newsletters/2026-05/index.html', 'table-tennis.html']) {
       for (const width of [320, 375, 1024, 1440]) {
         await page.setViewportSize({ width, height: 900 });
         await page.goto(`${origin}/${route}`);
@@ -187,77 +187,32 @@ test('May images declare correct intrinsic dimensions and print retains desktop 
   } finally { await page.close(); }
 });
 
-test('junior page explains assessment, matches membership prices and works without JavaScript', async () => {
+test('coaching stays on the homepage, with assessment-led groups and timetable enquiries to the head coach', async () => {
   const page = await newPage({ javaScriptEnabled: false, viewport: { width: 375, height: 812 } });
   try {
     await page.emulateMedia({ reducedMotion: 'reduce' });
     await page.goto(`${origin}/index.html`);
-    const homeRates = await page.locator('.membership-options .fee-card').evaluateAll(cards => Object.fromEntries(
-      cards.map(card => [card.querySelector('h3').textContent, card.querySelector('.price').textContent])));
-    assert.equal(await page.locator('.junior-panel a[href="juniors.html"]').count(), 1);
-    await page.locator('.service-list a[href="juniors.html"]').click();
-    await page.waitForURL('**/juniors.html');
-    assert.equal(await page.locator('h1').textContent(), 'Junior tennis and coaching.');
-    assert.match(await page.locator('.group-guidance').textContent(), /assessed the player/);
-    assert.doesNotMatch(await page.locator('main').textContent(), /timetable/i);
-    assert.deepEqual(await page.locator('.junior-rates .rate-value').allTextContents(),
-      [homeRates['Under 5'], homeRates['Junior 5-10'], homeRates['Junior 11-18']]);
-    assert.deepEqual(await page.locator('.reduced-rate').allTextContents(), ['£10.20', '£45', '£55.20']);
-    assert.match(await page.locator('.coaching-cost-note').textContent(), /not lessons or holiday camps/);
-    const contacts = page.locator('#coaches .coach-card a');
+    assert.equal(await page.locator('a[href="coaching.html"]').count(), 0);
+    assert.equal(await page.locator('a[href="juniors.html"]').count(), 0);
+    assert.deepEqual(await page.locator('.service-list a[href="#coaching"] span').allTextContents(),
+      ['Adult coaching', 'Junior tennis']);
+    assert.match(await page.locator('#coaching .section-heading').textContent(),
+      /Coaching fees are additional to club membership/);
+    const panels = page.locator('#coaching > .junior-panel');
+    for (const panel of await panels.all()) {
+      assert.match(await panel.textContent(), /after an assessment/);
+      assert.match(await panel.textContent(), /ask Chris about timetables and availability/);
+    }
+    assert.equal(await page.locator('#coaching .coaching-availability').count(), 0);
+    const contacts = page.locator('#coaching .coach-card a');
     assert.deepEqual(await contacts.evaluateAll(es => es.map(e => e.href)),
       ['https://wa.me/447720941494', 'https://wa.me/447928091993']);
     assert.ok(await contacts.evaluateAll(es => es.every(e => e.hasAttribute('data-goatcounter-click'))));
     for (const width of [320, 375, 620, 768, 1024, 1440]) {
       await page.setViewportSize({ width, height: 900 });
-      assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `Junior page overflows at ${width}px`);
+      assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `Coaching overflows at ${width}px`);
     }
-    await page.locator('.junior-header a[href="index.html#coaching"]').click();
-    await page.waitForURL('**/index.html#coaching');
-  } finally { await page.close(); }
-});
-
-test('adult coaching links, provisional evening groups and separate charges work without JavaScript', async () => {
-  const page = await newPage({ javaScriptEnabled: false, viewport: { width: 375, height: 812 } });
-  try {
-    await page.emulateMedia({ reducedMotion: 'reduce' });
-    await page.goto(`${origin}/index.html`);
-    assert.equal(await page.locator('#coaching a[href="coaching.html"]').count(), 1);
-    assert.match(await page.locator('#coaching .section-heading').textContent(), /Coaching fees are additional to club membership/);
-    const homeAdultRates = await page.locator('.membership-core .price').allTextContents();
-    await page.locator('.service-list a[href="coaching.html"]').click();
-    await page.waitForURL('**/coaching.html');
-    assert.equal(await page.locator('h1').textContent(), 'Adult tennis coaching.');
-    const adultHero = page.locator('.coaching-welcome img');
-    assert.equal(await adultHero.getAttribute('src'), 'assets/gallery/IMG_2266.jpeg');
-    assert.equal(await adultHero.getAttribute('alt'), 'Adult players on the hard courts at Carshalton Lawn Tennis Club');
-    assert.match(await page.locator('.coaching-welcome figcaption').textContent(), /Adult tennis on the hard courts/);
-    assert.match(await page.locator('.lesson-guidance').textContent(), /One-to-one coaching/);
-    assert.match(await page.locator('.coaching-charge-note').textContent(), /additional to club membership/);
-    assert.deepEqual(await page.locator('.adult-rates h3').allTextContents(), ['Full adult', 'Midweek adult', 'Family membership']);
-    assert.deepEqual(await page.locator('.adult-rates .rate-value').allTextContents(), homeAdultRates);
-    assert.match(await page.locator('.coaching-cost-note').textContent(), /not individual lessons or group coaching/);
-    assert.equal(await page.locator('#coaching-costs a[data-goatcounter-click="adult-membership"]').getAttribute('href'),
-      'https://clubspark.lta.org.uk/CarshaltonLTC/Membership/Join');
-    assert.deepEqual(await page.locator('.session-card h3').allTextContents(), ['Monday evening', 'Wednesday evening']);
-    assert.match(await page.locator('.session-review-note').textContent(), /still need confirmation/);
-    for (const card of await page.locator('.session-card').all()) {
-      assert.deepEqual(await card.locator('dd').allTextContents(),
-        ['To be confirmed', 'To be confirmed — the coach will advise on a suitable group.', 'To be confirmed']);
-    }
-    const contacts = page.locator('#coaches .coach-card a');
-    assert.deepEqual(await contacts.evaluateAll(es => es.map(e => e.href)),
-      ['https://wa.me/447720941494', 'https://wa.me/447928091993']);
-    assert.ok(await contacts.evaluateAll(es => es.every(e => e.hasAttribute('data-goatcounter-click'))));
-    for (const width of [320, 375, 620, 768, 1024, 1440]) {
-      await page.setViewportSize({ width, height: 900 });
-      assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `Adult coaching overflows at ${width}px`);
-    }
-    await page.locator('.junior-coaching-link a').click();
-    await page.waitForURL('**/juniors.html');
-    assert.doesNotMatch(await page.locator('main').textContent(), /timetable/i);
-    await page.goto(`${origin}/coaching.html`);
-    await page.locator('.coaching-header a[href="index.html#coaching"]').click();
+    await page.locator('.service-list a[href="#coaching"] span', { hasText: 'Junior tennis' }).click();
     await page.waitForURL('**/index.html#coaching');
   } finally { await page.close(); }
 });
@@ -329,10 +284,10 @@ test('homepage aerial remains a complete landscape image at desktop and tablet w
   } finally { await page.close(); }
 });
 
-test('approved junior photo and coach silhouettes appear across all three pages', async () => {
+test('approved junior photo appears in the gallery and coach silhouettes on the homepage', async () => {
   const page = await newPage();
   try {
-    for (const route of ['index.html', 'coaching.html', 'juniors.html']) {
+    for (const route of ['index.html']) {
       await page.goto(`${origin}/${route}`);
       const portraits = page.locator('.coach-card .coach-photo');
       assert.equal(await portraits.count(), 2);
@@ -348,12 +303,9 @@ test('approved junior photo and coach silhouettes appear across all three pages'
       }
       if (route === 'index.html') assert.equal(await page.locator('#contacts .coach-photo').count(), 0);
     }
-    const juniorPhoto = page.locator('.junior-welcome figure img');
-    assert.equal(await juniorPhoto.getAttribute('src'), 'assets/gallery/junior-tennis-cropped.jpg?v=red-ball-20261118');
-    assert.equal(await juniorPhoto.getAttribute('width'), '1200');
-    assert.equal(await juniorPhoto.getAttribute('height'), '800');
+    await page.goto(`${origin}/gallery.html`);
+    const juniorPhoto = page.locator('#gallery-photos a[href="assets/gallery/junior-tennis-cropped.jpg"] img');
     assert.equal(await juniorPhoto.getAttribute('alt'), 'Children playing Red Ball tennis at the club');
-    assert.match(await page.locator('.junior-welcome figcaption').textContent(), /Red Ball tennis at Carshalton/);
     assert.ok(await juniorPhoto.evaluate(async image => {
       await image.decode();
       return image.naturalWidth === 1200 && image.naturalHeight === 800;
@@ -370,16 +322,14 @@ test('homepage gives adult and junior coaching matching panels below the coaches
     assert.equal(await page.locator('#coaching .section-heading a').count(), 0);
     assert.equal(await page.locator('#coaching .coach-card').count(), 2);
     assert.equal(await page.locator('#coaching .coach-photo').count(), 2);
-    assert.equal(await panels.nth(0).locator('.button.primary').getAttribute('href'), 'coaching.html');
-    assert.equal(await panels.nth(1).locator('.button.primary').getAttribute('href'), 'juniors.html');
     for (const panel of await panels.all()) {
-      assert.equal(await panel.locator('.button').count(), 2);
-      assert.equal(await panel.locator('.button.secondary').getAttribute('href'), 'https://wa.me/447720941494');
+      assert.equal(await panel.locator('.button').count(), 1);
+      assert.equal(await panel.locator('.button').getAttribute('href'), 'https://wa.me/447720941494');
     }
     for (const width of [320, 390, 768, 1024, 1440]) {
       await page.setViewportSize({ width, height: 900 });
-      const adult = await panels.nth(0).locator('.button.primary').boundingBox();
-      const junior = await panels.nth(1).locator('.button.primary').boundingBox();
+      const adult = await panels.nth(0).locator('.button').boundingBox();
+      const junior = await panels.nth(1).locator('.button').boundingBox();
       assert.ok(Math.abs(adult.width - junior.width) < 1, `Coaching buttons have different widths at ${width}px`);
       assert.ok(Math.abs(adult.x - junior.x) < 1, `Coaching buttons are not aligned at ${width}px`);
       assert.ok(adult.x >= 0 && adult.x + adult.width <= width, `Coaching panel overflows at ${width}px`);
