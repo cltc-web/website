@@ -305,7 +305,7 @@ test('coaching stays on the homepage, with assessment-led groups and timetable e
   } finally { await page.close(); }
 });
 
-test('table tennis page is clearly provisional and works without JavaScript', async () => {
+test('table tennis page has the committee-supplied adult membership and play guidance without JavaScript', async () => {
   const page = await newPage({ javaScriptEnabled: false, viewport: { width: 375, height: 812 } });
   try {
     await page.goto(`${origin}/index.html`);
@@ -316,16 +316,22 @@ test('table tennis page is clearly provisional and works without JavaScript', as
     const hero = page.locator('.table-tennis-welcome img');
     assert.equal(await hero.getAttribute('src'), 'assets/gallery/table-tennis-match.jpg');
     assert.equal(await hero.getAttribute('alt'), 'Two players competing in a table tennis match in the clubhouse');
-    assert.match(await page.locator('.draft-notice').textContent(), /Draft information for committee review/);
-    assert.equal(await page.locator('.table-tennis-grid .provisional').count(), 3);
-    assert.ok(await page.locator('.table-tennis-grid .provisional').allTextContents()
-      .then(messages => messages.every(message => /to be confirmed/.test(message))));
+    assert.equal(await page.locator('.draft-notice').count(), 0);
+    const guidance = await page.locator('.table-tennis-grid').textContent();
+    assert.match(guidance, /Sunday, Monday, Wednesday and Thursday evenings, from around 7pm/);
+    assert.match(guidance, /club calendar shows that the hall is available/);
+    assert.match(guidance, /second week of September until Easter/);
+    assert.match(guidance, /Practice is not available when a home match is taking place/);
+    assert.doesNotMatch(guidance, /Coaching/);
     const contact = page.locator('#contact a[data-goatcounter-click="table-tennis-lewis-whatsapp"]');
     assert.equal(await contact.getAttribute('href'), 'https://wa.me/447985304405');
-    const membershipEmail = page.locator('#contact a[data-goatcounter-click="table-tennis-membership-email"]');
-    assert.equal(await membershipEmail.getAttribute('href'), 'mailto:cltcmembership@gmail.com?subject=Table%20tennis%20enquiry');
-    assert.equal(await page.locator('#contact a[href="index.html#fees"]').count(), 0);
-    assert.match(await page.locator('#contact .membership-help').textContent(), /separately from LTA tennis membership/);
+    const membershipPackage = page.locator('#membership a[data-goatcounter-click="table-tennis-membership-packages"]');
+    assert.equal(await membershipPackage.getAttribute('href'), 'https://clubspark.lta.org.uk/CarshaltonLTC/Membership/Join');
+    const membershipEmail = page.locator('#membership a[data-goatcounter-click="table-tennis-membership-enquiry"]');
+    assert.equal(await membershipEmail.getAttribute('href'), 'mailto:cltcmembership@gmail.com?subject=Table%20tennis%20membership%20enquiry');
+    assert.match(await page.locator('#membership').textContent(), /Join table tennis for £60 a year/);
+    assert.match(await page.locator('#membership').textContent(), /For current packages and joining, please use ClubSpark or contact the\s+membership secretary/);
+    assert.match(await page.locator('main').textContent(), /currently for adults/);
     for (const width of [320, 375, 620, 768, 1024, 1440]) {
       await page.setViewportSize({ width, height: 900 });
       assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `Table tennis page overflows at ${width}px`);
