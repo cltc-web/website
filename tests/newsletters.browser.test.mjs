@@ -74,6 +74,49 @@ test('shared headers fit without overlapping at phone, tablet and desktop breakp
   } finally { await page.close(); }
 });
 
+test('homepage uses a more compact desktop and mobile rhythm without changing its layout', async () => {
+  const page = await newPage({ viewport: { width: 1440, height: 900 } });
+  try {
+    await page.goto(`${origin}/index.html`);
+    const spacing = await page.evaluate(() => {
+      const measure = selector => {
+        const style = getComputedStyle(document.querySelector(selector));
+        return { top: parseFloat(style.paddingTop), bottom: parseFloat(style.paddingBottom) };
+      };
+      return {
+        hero: measure('.hero'),
+        split: measure('#about'),
+        sections: ['#play', '#coaching', '#programme', '#gallery', '#fees', '#newsletters'].map(measure),
+        headingMargin: parseFloat(getComputedStyle(document.querySelector('#play .section-heading')).marginBottom),
+        overflow: document.documentElement.scrollWidth > innerWidth,
+      };
+    });
+    assert.deepEqual(spacing.hero, { top: 56, bottom: 80 });
+    assert.deepEqual(spacing.split, { top: 66, bottom: 66 });
+    assert.ok(spacing.sections.every(section => section.top === 68 && section.bottom === 68));
+    assert.equal(spacing.headingMargin, 28);
+    assert.equal(spacing.overflow, false);
+
+    await page.setViewportSize({ width: 390, height: 844 });
+    const mobileSpacing = await page.evaluate(() => {
+      const measure = selector => {
+        const style = getComputedStyle(document.querySelector(selector));
+        return { top: parseFloat(style.paddingTop), bottom: parseFloat(style.paddingBottom) };
+      };
+      return {
+        split: measure('#about'),
+        sections: ['#play', '#coaching', '#programme', '#gallery', '#fees', '#newsletters'].map(measure),
+        headingMargin: parseFloat(getComputedStyle(document.querySelector('#play .section-heading')).marginBottom),
+        overflow: document.documentElement.scrollWidth > innerWidth,
+      };
+    });
+    assert.deepEqual(mobileSpacing.split, { top: 44, bottom: 44 });
+    assert.ok(mobileSpacing.sections.every(section => section.top === 44 && section.bottom === 44));
+    assert.equal(mobileSpacing.headingMargin, 22);
+    assert.equal(mobileSpacing.overflow, false);
+  } finally { await page.close(); }
+});
+
 test('newsletter index supports skip navigation, reduced motion and mobile links', async () => {
   const page = await newPage({ viewport: { width: 375, height: 812 } });
   try {
@@ -143,6 +186,9 @@ test('policies list every supplied document once and preserve the cookie-free an
       assert.equal((await response.body()).subarray(0, 5).toString(), '%PDF-');
     }
     assert.match(await page.locator('main').textContent(), /anonymous, cookie-free visitor and link-click statistics/);
+    assert.equal(await page.locator('script[data-goatcounter="https://cltc-web.goatcounter.com/count"]').count(), 1);
+    await page.goto(`${origin}/index.html`);
+    assert.equal(await page.getByText('Website analytics', { exact: true }).count(), 0);
     assert.equal(await page.locator('script[data-goatcounter="https://cltc-web.goatcounter.com/count"]').count(), 1);
   } finally { await page.close(); }
 });

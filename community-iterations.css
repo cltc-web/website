@@ -34,8 +34,13 @@
 .iteration .boc-logo { display:flex; align-items:center; justify-content:center; width:100%; height:100%; min-width:0; }
 .iteration .boc-logo img { width:min(320px,100%); height:auto; }
 .iteration .venue-card img { width:min(240px,100%); height:auto; }
-/* Anchors sit on padded sections; offset that padding so the heading, not the border, lands near the viewport top. */
+/* A modest desktop-only compaction: retain breathing room without stacking 76–80px of padding at every section boundary. */
 @media (min-width:901px) {
+  .iteration-c .hero { padding:56px 0 80px; }
+  .iteration-c :is(.services-section,.fees-section,.gallery-section,.coaching-section,.newsletters-section) { padding:68px 0; }
+  .iteration-c .split-section { padding:66px 0; }
+  .iteration-c .section-heading { margin-bottom:28px; }
+  /* Anchors sit on padded sections; offset that padding so the heading, not the border, lands near the viewport top. */
   .iteration :is(#about,#play,#competitive,#coaching,#programme,#gallery,#fees,#newsletters,#contacts) { scroll-margin-top:-76px; }
 }
 @media (max-width:900px) {
@@ -207,6 +212,9 @@
   .iteration-c .hero-social { grid-column:2; display:block; border-radius:14px; }
   .iteration-c .hero-social img { aspect-ratio:.97; height:auto; }
   .iteration-c .hero-social figcaption { padding:8px 2px 2px; font-size:12px; }
+  /* Keep the long one-page mobile journey moving, while preserving card padding and touch targets. */
+  .iteration-c :is(.split-section,.services-section,.fees-section,.gallery-section,.coaching-section,.newsletters-section) { padding:44px 0; }
+  .iteration-c .section-heading { margin-bottom:22px; }
   /* Community's desktop 6-column spans must not create implicit columns on phones. */
   .iteration-c .gallery-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
   .iteration-c .gallery-grid figure,
