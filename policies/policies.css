@@ -1,3 +1,51 @@
 .simple-newsletter-page .newsletter-simple-list + h2 {
   margin-top: 2.5rem;
 }
+
+.header-lta-current {
+  width: 96px;
+  height: auto;
+  flex-shrink: 0;
+}
+
+@media (max-width: 1350px) {
+  .site-header { grid-template-columns: minmax(0, 1fr) auto; }
+  .site-header .header-credentials { grid-column: 2; grid-row: 1; }
+  .site-header nav { grid-column: 1 / -1; grid-row: 2; }
+}
+
+@media (max-width: 620px) {
+  .site-header { gap: 10px; }
+  .brand { min-width: 0; gap: 8px; font-size: 13px; }
+  .brand img { width: 36px; height: 36px; }
+  .header-credentials { gap: 6px; }
+  .header-sponsor img { width: 66px; }
+  .header-lta-current { width: 72px; }
+}
+
+@media (max-width: 360px) {
+  .brand { gap: 5px; font-size: 11px; }
+  .brand img { width: 32px; height: 32px; }
+  .header-sponsor img { width: 54px; }
+  .header-lta-current { width: 64px; }
+}
+
+.policy-registration {
+  margin: 0 0 2.5rem;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--white);
+}
+
+.policy-registration img {
+  display: block;
+  width: min(340px, 100%);
+  height: auto;
+}
+
+.policy-registration figcaption {
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}

@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { readFile } from 'node:fs/promises';
+import { readFile, readdir } from 'node:fs/promises';
 import { createServer } from 'node:http';
 import { dirname, extname, resolve, sep } from 'node:path';
 import { after, before, test } from 'node:test';
@@ -127,10 +127,98 @@ test('newsletter header theme does not restyle the existing archive content', as
   } finally { await page.close(); }
 });
 
-test('newsletter and table tennis pages pass sampled WCAG accessibility checks', async () => {
+test('policies list every supplied document once and preserve the cookie-free analytics note', async () => {
+  const page = await newPage({ javaScriptEnabled: false });
+  try {
+    await page.goto(`${origin}/policies/index.html`);
+    const links = await page.locator('main a[href^="documents/"]').evaluateAll(links =>
+      links.map(link => new URL(link.href).pathname.split('/').pop()));
+    const documents = (await readdir(resolve(root, 'policies/documents'))).filter(name => name.endsWith('.pdf'));
+    assert.equal(links.length, 9);
+    assert.deepEqual([...links].sort(), documents.sort());
+    assert.equal(await page.getByRole('link', { name: 'Transgender and non-binary policy statement', exact: true }).count(), 1);
+    for (const name of documents) {
+      const response = await page.request.get(`${origin}/policies/documents/${name}`);
+      assert.equal(response.status(), 200, `${name} is missing`);
+      assert.equal((await response.body()).subarray(0, 5).toString(), '%PDF-');
+    }
+    assert.match(await page.locator('main').textContent(), /anonymous, cookie-free visitor and link-click statistics/);
+    assert.equal(await page.locator('script[data-goatcounter="https://cltc-web.goatcounter.com/count"]').count(), 1);
+  } finally { await page.close(); }
+});
+
+test('wide LTA badge appears in the header and retains a larger complete version in the content', async () => {
   const page = await newPage();
   try {
-    for (const route of ['newsletters/index.html', 'newsletters/2026-05/index.html', 'table-tennis.html']) {
+    for (const [route, selector] of [['index.html', '.venue-card img'], ['policies/index.html', '.policy-registration img']]) {
+      await page.goto(`${origin}/${route}`);
+      const headerBadge = page.locator('.site-header .header-lta');
+      assert.equal(await headerBadge.count(), 1);
+      assert.match(await headerBadge.getAttribute('src'), /lta-registered-venue-2026-27\.png$/);
+      const badge = page.locator(selector);
+      assert.match(await badge.getAttribute('src'), /lta-registered-venue-2026-27\.png$/);
+      assert.match(await badge.getAttribute('alt'), /Registered Venue 2026\/27/);
+      for (const width of [320, 375, 620, 768, 1024, 1440]) {
+        await page.setViewportSize({ width, height: 900 });
+        const headerSize = await headerBadge.evaluate(async image => {
+          await image.decode();
+          const box = image.getBoundingClientRect();
+          return { width: box.width, ratio: box.width / box.height, naturalRatio: image.naturalWidth / image.naturalHeight };
+        });
+        assert.ok(headerSize.width >= 64, `${route} header badge too small at ${width}px`);
+        assert.ok(Math.abs(headerSize.ratio - headerSize.naturalRatio) < 0.001, `${route} header badge distorted at ${width}px`);
+        await badge.scrollIntoViewIfNeeded();
+        const size = await badge.evaluate(async image => {
+          await image.decode();
+          const box = image.getBoundingClientRect();
+          return { width: box.width, ratio: box.width / box.height, naturalRatio: image.naturalWidth / image.naturalHeight,
+            intrinsicWidth: Number(image.getAttribute('width')), intrinsicHeight: Number(image.getAttribute('height')),
+            naturalWidth: image.naturalWidth, naturalHeight: image.naturalHeight };
+        });
+        assert.ok(size.width >= 210, `${route} badge too small at ${width}px`);
+        assert.ok(Math.abs(size.ratio - size.naturalRatio) < 0.001, `${route} badge distorted at ${width}px`);
+        assert.equal(size.intrinsicWidth, size.naturalWidth);
+        assert.equal(size.intrinsicHeight, size.naturalHeight);
+        assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `${route} overflows at ${width}px`);
+      }
+    }
+  } finally { await page.close(); }
+});
+
+test('sponsor and registration panels are compact, centred and balanced', async () => {
+  const page = await newPage();
+  try {
+    await page.goto(`${origin}/index.html`);
+    await page.locator('.sponsor-strip img').evaluateAll(images => images.forEach(image => { image.loading = 'eager'; }));
+    for (const width of [320, 390, 768, 1024, 1440]) {
+      await page.setViewportSize({ width, height: 900 });
+      const panels = await page.locator('.sponsor-strip > div').evaluateAll(async cards => {
+        await Promise.all(cards.map(card => card.querySelector('img').decode()));
+        return cards.map(card => {
+          const box = card.getBoundingClientRect();
+          const logo = card.querySelector('img').getBoundingClientRect();
+          const label = card.querySelector('.sponsor-label').getBoundingClientRect();
+          return { height: box.height, logoWidth: logo.width,
+            logoOffset: Math.abs(logo.x + logo.width / 2 - box.x - box.width / 2),
+            labelOffset: Math.abs(label.x + label.width / 2 - box.x - box.width / 2),
+            logoCentreY: logo.y + logo.height / 2 - box.y,
+            labelY: label.y - box.y };
+        });
+      });
+      assert.ok(panels.every(panel => panel.height <= 210), `Logo panels too tall at ${width}px`);
+      assert.ok(panels.every(panel => panel.logoOffset < 1 && panel.labelOffset < 1), `Logos not centred at ${width}px`);
+      assert.ok(Math.abs(panels[0].height - panels[1].height) < 1, `Panel heights differ at ${width}px`);
+      assert.ok(Math.abs(panels[0].logoCentreY - panels[1].logoCentreY) < 1, `Logo centres differ at ${width}px`);
+      assert.ok(Math.abs(panels[0].labelY - panels[1].labelY) < 1, `Headings misaligned at ${width}px`);
+      assert.ok(panels[0].logoWidth >= panels[1].logoWidth, `Sponsor gets less width at ${width}px`);
+    }
+  } finally { await page.close(); }
+});
+
+test('newsletter, table tennis and policy pages pass sampled WCAG accessibility checks', async () => {
+  const page = await newPage();
+  try {
+    for (const route of ['newsletters/index.html', 'newsletters/2026-05/index.html', 'table-tennis.html', 'policies/index.html']) {
       for (const width of [320, 375, 1024, 1440]) {
         await page.setViewportSize({ width, height: 900 });
         await page.goto(`${origin}/${route}`);

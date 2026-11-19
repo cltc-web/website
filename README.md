@@ -9,7 +9,8 @@ Static website for GitHub Pages, served from the repository root. Open `index.ht
 - Coaching stays on the homepage: there are no separate adult or junior coaching pages and no published timetable. Coaches assess players before recommending a group, and the coaching section directs timetable and availability questions to the head coach. Coaching charges are additional to club membership.
 - `assets/`: website images, logos and venue badge.
 - `newsletters/`: public newsletter index and published May 2026 issue.
-- `policies/`: policy index and local PDF copies retrieved from the club's previous policies page. Confirm these are the current approved versions.
+- `policies/`: nine supplied policy PDFs, including the transgender and non-binary statement, replacing the previous eight-document set. PDF wording is preserved as supplied; obtain corrected originals for any policy-author changes. Existing document paths are retained, with versioned links to avoid stale cached PDFs.
+- `assets/lta-registered-venue-2026-27.png`: web rendering of the supplied LTA PDF. The complete wide badge appears in the shared header and policies-page header, with larger versions in the homepage registration card and policies-page content. The published May newsletter retains its original badge.
 - CSS files: homepage, history and newsletter index styling. The May issue has its own styles and assets.
 - `templates/site-header.html` and `navigation.js`: shared homepage/newsletter-index header and mobile-menu behaviour.
 - `newsletters/issues.json`: explicit catalogue of approved, published newsletters; generates cards on both listing pages.
@@ -56,7 +57,7 @@ Tests cover catalogue validation/escaping, generated HTML freshness, header over
 - Replace the coach silhouettes with approved photographs. Confirm photo permissions before adding identifiable people to the gallery or other public pages.
 - Confirm fees, sessions, teams, coaching details, contact details and photo permissions.
 - Have the table tennis committee replace the provisional information in `table-tennis.html` with approved session, team and charge details before publishing.
-- Replace the 2024/25 LTA badge with a current approved asset.
+- Resolve policy-author review points: the safeguarding statement's club-name placeholder, privacy wording (dates, data-protection references and cookies), social-media administrator roles, and the older photography/transgender statement dates. Confirm the related changing-room, safe-recruitment and disciplinary/complaints policies referenced by the supplied documents.
 - Review the history's archival wording about “today” and the first 100 years.
 - Check the public newsletter and its linked documents before publication.
 - Complete accessibility, mobile and browser checks. Check the GitHub Pages settings and domain/DNS separately.

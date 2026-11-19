@@ -18,6 +18,22 @@
 }
 
 .iteration .history-link a { font-weight:750; color:var(--green-dark); text-underline-offset:4px; }
+/* Keep the complete wide badge in the header; the registration card below provides the larger view. */
+.iteration .site-header .header-lta-current { width:96px; height:auto; flex-shrink:0; }
+@media (min-width:901px) and (max-width:1150px) {
+  .iteration .site-header .header-lta-current { width:72px; }
+}
+@media (max-width:620px) {
+  .iteration .site-header .header-lta-current { width:72px; }
+}
+@media (max-width:360px) {
+  .iteration .site-header .header-lta-current { width:64px; }
+}
+/* Matching compact logo panels: centre both marks and give the sponsor comparable visual weight. */
+.iteration :is(.sponsor-card,.venue-card) { display:grid; grid-template-columns:minmax(0,1fr); grid-template-rows:auto 128px; justify-items:center; align-content:center; justify-content:center; gap:12px; padding:20px; min-width:0; text-align:center; }
+.iteration .boc-logo { display:flex; align-items:center; justify-content:center; width:100%; height:100%; min-width:0; }
+.iteration .boc-logo img { width:min(320px,100%); height:auto; }
+.iteration .venue-card img { width:min(240px,100%); height:auto; }
 /* Anchors sit on padded sections; offset that padding so the heading, not the border, lands near the viewport top. */
 @media (min-width:901px) {
   .iteration :is(#about,#play,#competitive,#coaching,#programme,#gallery,#fees,#newsletters,#contacts) { scroll-margin-top:-76px; }
